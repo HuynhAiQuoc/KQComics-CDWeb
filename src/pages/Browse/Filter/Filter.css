@@ -1,0 +1,45 @@
+
+
+.height-filter {
+    height: calc(100% - var(--height-header));
+}
+
+
+.filter-input {
+    background-color: transparent;
+    -webkit-appearance: none;
+    border: 1px solid var(--gray-color);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+
+.filter-radio-input {
+    border-radius: 50%;
+}
+
+
+.filter-check-input {
+    border-radius: 4px;
+}
+
+.filter-radio-input:checked[type=radio] {
+    background-image: url(/src/assets/img/ok-16.png);
+    border: none;
+}
+
+.filter-check-input:checked[type=checkbox] {
+    background-image: url(/src/assets/img/check-mark-8-16.png);
+    border: none;
+}
+
+.filter-input:hover {
+    border-color: var(--yellow-color);
+}
+
+.filter-btn{
+    height: 32px;
+    padding: 4px 10px;
+    align-items: center;
+}

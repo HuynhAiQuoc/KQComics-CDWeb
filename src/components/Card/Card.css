@@ -1,0 +1,47 @@
+.card {
+    color: var(--white-color);
+    background-color: var(--background-color-black);
+}
+
+.img-container {
+    position: relative;
+}
+
+
+.card-img-container {
+    height: var(--max-height-img-card);
+    object-fit: cover;
+}
+
+.card-img-overlay {
+    height: 25px;
+    position: absolute;
+    top: auto;
+    background-color: var(--background-color-black);
+    opacity: 0.65;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    color: var(--white-color);
+    font-size: 13px;
+}
+
+.card-title {
+    color: var(--white-color)
+}
+
+
+.icon-hot {
+    background: url(http://st.nettruyenco.com/Data/Sites/1/skins/comic/images/icon-hot.gif) no-repeat;
+    height: 11px;
+    top: 5px;
+    display: inline-block;
+    bottom: auto;
+    position: absolute;
+    right: 5px;
+    height: 11px;
+    width: 28px;
+}
+
+.card-overlay-text{
+    margin-left: 3px;
+}
