@@ -32,14 +32,14 @@ function SearchField() {
                     render={attrs => (
                         <div className="box-search-result" tabIndex="-1" {...attrs}>
                             <div className="search-result-content">
-                                
+
                                 <div className="search-result-content-item">
                                     <img src="http://st.nettruyenco.com/data/comics/85/thon-phe-mot-the-gioi-tu-tien.jpg" className="search-result-item--img" alt="" />
                                     <p className="search-result-item--info">
                                         Thôn phệ một thế giới tu tiên
                                     </p>
                                 </div>
-                                
+
 
                                 {/* <div className="search-result-none">
                                     <div className="search-result-none-icon">
@@ -55,7 +55,7 @@ function SearchField() {
                     )}
 
                 >
-                    <div className="d-flex align-items-center input-group border border-color-white border-radius">
+                    <div className="input-group-append d-flex align-items-center input-group border border-color-white border-radius">
                         <input
                             type="text"
                             name="search"
@@ -64,13 +64,12 @@ function SearchField() {
                             onFocus={handleShowSearchResult}
                             onBlur={handleShowSearchResult}
                         />
-                        <div className="input-group-append">
-                            <button
-                                className="d-lg-block d-none btn btn-outline-secondary border-0 border-start border-color-white"
-                                type="submit">
-                                <FontAwesomeIcon icon={faMagnifyingGlass} />
-                            </button>
-                        </div>
+
+                        <button
+                            className="d-lg-block d-none btn btn-outline-secondary border-0 border-start border-color-white"
+                            type="submit">
+                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                        </button>
                     </div>
                 </Tippy>
 

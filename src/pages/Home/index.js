@@ -31,6 +31,9 @@ function Home() {
                             <div className="mt-4">
                                 <Carousel
                                     interval={5000}
+                                    controls={false}
+                                    indicators={false}
+                                    pause={false}
                                 >
                                     {banners.map((banner, index) => (
                                         <Carousel.Item key={index}>

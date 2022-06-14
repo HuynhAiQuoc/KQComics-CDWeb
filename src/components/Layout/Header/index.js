@@ -6,12 +6,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import Navbar from './Navbar/index.js';
 import SearchField from './SearchField/index.js';
+import LoginForm from '~/pages/Account/index.js'
+
 
 import { useState } from 'react';
 
 function Header() {
 
     const [showSearchField, setShowSearchField] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     const handleShowSearchField = () => {
         setShowSearchField(pre => {
@@ -61,11 +64,15 @@ function Header() {
                                 </div>
 
                                 <button
+                                    onClick={() => setShowModal(true)}
                                     className="signin-btn rounded-3 bg-transparent text-yellow border border-color-yellow ps-3 pe-3">
                                     <FontAwesomeIcon icon={faUserPlus} className="d-lg-block d-none" />
                                     <i className="fa fa-user me-2 "></i>
                                     Sign in
                                 </button>
+
+                                <LoginForm showModal={showModal} onClose={()=>setShowModal(false)} />
+
                             </div>
 
                         </div>

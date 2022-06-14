@@ -10,11 +10,14 @@ body {
 :root {
     --max-height-img-card: 230px;
     --white-color: rgb(207, 207, 207);
-    --gray-color: rgb(41, 41, 41);
+    --gray-color: #434343;
+    --gray-color-light: #7e7e7e;
+    --black-color: #000;
     --background-color-black: #000;
     --yellow-color: #F6D501;
     --height-header: 64px;
-    --background-header: #141414;
+    --background-header: #1f1f1f;
+    --red-color: #c8584a;
  
 }
 
@@ -88,11 +91,15 @@ html {
 
 
 .text-white {
-    color: var(--white-color) !important;
+    color: var(--white-color);
+}
+
+.text-gray {
+    color: var(--gray-color-light);
 }
 
 .text-yellow {
-    color: var(--yellow-color) !important;
+    color: var(--yellow-color);
 }
 
 
@@ -139,6 +146,11 @@ html {
     z-index: 1;
 }
 
+
+
+.rounded-4{
+    border-radius: 8px;
+}
 .rounded-5{
     border-radius: 12px;
 }
@@ -147,6 +159,10 @@ html {
 
 label {
     cursor: pointer;
+}
+
+input{
+    caret-color: var(--white-color);
 }
 
 input,
