@@ -13,6 +13,7 @@
     padding: 0 22px 20px 22px;
 }
 
+
 .form-control-login {
     background-color: transparent;
     border-color: var(--gray-color);
@@ -43,6 +44,14 @@
     padding: 2px 10px;
     font-weight: 500;
     border-left: 1px solid;
+    border-bottom-right-radius: 7px;
+    border-top-right-radius: 7px;
+    background-color: transparent;
+}
+
+.btn-continue--active{
+    background-color: var(--yellow-color);
+    color: var(--background-header);
 }
 
 .separate-line {
@@ -111,7 +120,7 @@
 
 }
 
-.btn-login:not(disabled):hover{
+.btn-login:not(:disabled):hover{
     border-color: var(--yellow-color);
     color: var(--yellow-color);
 }
@@ -153,13 +162,20 @@
 
 .form-control-signup{
     align-items: center;
-    padding: 4px 11px;
+    padding: 4px 1px 4px 11px;
     background-color: transparent;
     border: 1px solid var(--gray-color);
     height: 32px;
-    margin-bottom: 12px;
+    /* margin-bottom: 12px; */
 }
 
+.form-control-signup:focus-within{
+    border-color: var(--yellow-color);
+}
+
+.form-control-signup--error{
+    border-color: var(--red-color) !important;
+}
 
 .signup-input-control{
     padding: 1px 2px;
@@ -172,3 +188,7 @@
     background-color: var(--yellow-color);
 }
  
+
+.message-error{
+    font-size: 15px;
+}

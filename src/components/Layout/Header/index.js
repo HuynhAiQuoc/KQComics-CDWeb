@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import Navbar from './Navbar/index.js';
 import SearchField from './SearchField/index.js';
-import LoginForm from '~/pages/Account/index.js'
+import Account from '~/pages/Account/index.js'
 
 
 import { useState } from 'react';
@@ -71,7 +71,7 @@ function Header() {
                                     Sign in
                                 </button>
 
-                                <LoginForm showModal={showModal} onClose={()=>setShowModal(false)} />
+                                <Account showModal={showModal} onClose={()=>setShowModal(false)} />
 
                             </div>
 
