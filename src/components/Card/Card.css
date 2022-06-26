@@ -11,6 +11,11 @@
 .card-img-container {
     height: var(--max-height-img-card);
     object-fit: cover;
+    transition: transform .5s, -webkit-transform .5s, -moz-transform .5s, -o-transform .5s;
+}
+
+.card-img-container:hover{
+    transform: scale(1.04)
 }
 
 .card-img-overlay {

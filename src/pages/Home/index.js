@@ -11,36 +11,33 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 
-import banner_1 from '~/assets/img/banner/banner_1.jpg';
-import banner_2 from '~/assets/img/banner/banner_2.jpg';
-import banner_3 from '~/assets/img/banner/banner_3.jpg';
-import banner_4 from '~/assets/img/banner/banner_4.jpg';
-import banner_5 from '~/assets/img/banner/banner_5.jpg';
-import banner_6 from '~/assets/img/banner/banner_6.jpg';
-
 import genreLists from '~/data/genreLists.json'
 import data from '~/data/data.json'
 
-
-
-import { useState, useEffect } from 'react';
-
-// const banners = [banner_1, banner_2, banner_3, banner_4, banner_5, banner_6];
+import { useState } from 'react';
 
 function Home() {
-
-    const [genres, setGenres] = useState([])
+    const [genres] = useState([...genreLists]);
     const [banners] = useState(() => {
         const tem = data.sort((a, b) => { return b.favoriteCount - a.favoriteCount; });
         let result = [];
         for (let i = 0; i < 50; i++) { result.push(tem[i]) }
         return result;
     });
+    const [hostComics] = useState(() => {
+        const tem = data.sort((a, b) => { return b.favoriteCount - a.favoriteCount; });
+        let result = [];
+        for (let i = 0; i < 30; i++) { result.push(tem[i]) }
+        return result;
+    });
 
-    useEffect(() => {
-        setGenres(genreLists)
-    }, [])
-
+    const [suggestComics] = useState(() => {
+        const tem = data.sort((a, b) => { return b.starScoreAverage - a.starScoreAverage; });
+        let result = [];
+        for (let i = 0; i < 50; i++) { result.push(tem[i]) }
+        return result;
+    })
+ 
     const myStyle = {
         'maxHeight': '242px',
         'objectFit': 'cover',
@@ -86,66 +83,37 @@ function Home() {
                                                     <h5 className="text-white mb-1">TRUYỆN HOT</h5>
                                                 </div>
                                                 <CarouselSlider >
-                                                    {/* <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card /> */}
+                                                    {
+                                                        hostComics.map((comic) => (
+                                                            <Card comic={comic} key={comic.titleNo} />
+                                                        ))
+                                                    }
                                                 </CarouselSlider>
                                             </div>
                                             <div >
-                                                <div className="mt-4 ps-0 mb-4 pb-1 border-bottom border-color-white">
-                                                    <h5 className="text-white mb-1">TRUYỆN MỚI</h5>
+                                                <div className="mt-2 ps-0 mb-4 pb-1 border-bottom border-color-white">
+                                                    <h5 className="text-white mb-1">TRUYỆN ĐỀ CỬ</h5>
                                                 </div>
-                                                <CarouselSlider >
-                                                    {/* <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card /> */}
-                                                </CarouselSlider>
-                                            </div>
-                                            <div >
-                                                <div className="mt-4 ps-0 mb-4 pb-1 border-bottom border-color-white">
-                                                    <h5 className="text-white mb-1">TRUYỆN MỚI CẬP NHẬT</h5>
+                                                <div className="row">
+                                                    {
+                                                        suggestComics.map((comic) => (
+                                                            <div key={comic.titleNo} className="col-6 col-sm-4 col-md-3 five-columns p-2">
+                                                            <Card comic={comic} />
+                                                        </div>
+                                                        ))
+                                                    }
                                                 </div>
-                                                <CarouselSlider >
-                                                    {/* <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card /> */}
-                                                </CarouselSlider>
                                             </div>
-                                            <div >
-                                                <div className="mt-4 ps-0 mb-4 pb-1 border-bottom border-color-white">
-                                                    <h5 className="text-white mb-1">TRUYỆN</h5>
-                                                </div>
-                                                <CarouselSlider >
-                                                    {/* <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card />
-                                                    <Card /> */}
-                                                </CarouselSlider>
-                                            </div>
+                                           
                                         </div>
                                     </div>
-
+                            
                                     <div className="col-lg-3 d-lg-block d-none p-0">
-                                        <div className="explore mt-5 ps-3 pe-2">
+                                        <div className="explore mt-4 ps-3 pe-2">
                                             <div className="row">
-                                                <h4 className="title text-white">
-                                                    Khám phá
-                                                </h4>
+                                                <h5 className="title text-white">
+                                                    KHÁM PHÁ
+                                                </h5>
                                             </div>
                                             {
                                                 genres.map((item, index) => (
@@ -164,8 +132,6 @@ function Home() {
                                                     </div>
                                                 ))
                                             }
-
-
                                         </div>
                                     </div>
                                 </div>
