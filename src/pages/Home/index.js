@@ -19,20 +19,33 @@ import banner_5 from '~/assets/img/banner/banner_5.jpg';
 import banner_6 from '~/assets/img/banner/banner_6.jpg';
 
 import genreLists from '~/data/genreLists.json'
+import data from '~/data/data.json'
+
 
 
 import { useState, useEffect } from 'react';
 
-const banners = [banner_1, banner_2, banner_3, banner_4, banner_5, banner_6];
+// const banners = [banner_1, banner_2, banner_3, banner_4, banner_5, banner_6];
 
 function Home() {
 
     const [genres, setGenres] = useState([])
+    const [banners] = useState(() => {
+        const tem = data.sort((a, b) => { return b.favoriteCount - a.favoriteCount; });
+        let result = [];
+        for (let i = 0; i < 50; i++) { result.push(tem[i]) }
+        return result;
+    });
 
     useEffect(() => {
         setGenres(genreLists)
     }, [])
 
+    const myStyle = {
+        'maxHeight': '242px',
+        'objectFit': 'cover',
+        'borderRadius': '8px'
+    }
 
     return (
         <>
@@ -49,11 +62,14 @@ function Home() {
                                 >
                                     {banners.map((banner, index) => (
                                         <Carousel.Item key={index}>
-                                            <img
-                                                className="d-block w-100"
-                                                src={banner}
-                                                alt="First slide"
-                                            />
+                                            <a href="">
+                                                <img
+                                                    className="d-block w-100"
+                                                    style={myStyle}
+                                                    src={'https://webtoon-phinf.pstatic.net' + banner.bgNewIpad}
+                                                    alt="First slide"
+                                                />
+                                            </a>
                                         </Carousel.Item>
                                     ))}
                                 </Carousel>
