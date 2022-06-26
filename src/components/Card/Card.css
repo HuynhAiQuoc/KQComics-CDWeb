@@ -26,7 +26,8 @@
 }
 
 .card-title {
-    color: var(--white-color)
+    color: var(--white-color);
+    font-size: 18px;
 }
 
 

@@ -1,0 +1,131 @@
+
+ [
+    {
+        "name": "Drama",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/DRAMA.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_drama.png",
+        "index": 0,
+        "color": "00B19A",
+        "code": "DRAMA"
+    },
+    {
+        "name": "Fantasy",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/FANTASY.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_fantasy.png",
+        "index": 1,
+        "color": "8B00E9",
+        "code": "FANTASY"
+    },
+    {
+        "name": "Comedy",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/COMEDY.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_comedy.png",
+        "index": 2,
+        "color": "EEA800",
+        "code": "COMEDY"
+    },
+    {
+        "name": "Action",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/ACTION.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_action.png",
+        "index": 3,
+        "color": "006AFA",
+        "code": "ACTION"
+    },
+    {
+        "name": "Slice of life",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/SLICE_OF_LIFE.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_sliceoflife.png",
+        "index": 4,
+        "color": "9AB710",
+        "code": "SLICE_OF_LIFE"
+    },
+    {
+        "name": "Romance",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/ROMANCE.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_romance.png",
+        "index": 5,
+        "color": "FD337F",
+        "code": "ROMANCE"
+    },
+    {
+        "name": "Superhero",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/SUPER_HERO.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_superhero.png",
+        "index": 6,
+        "color": "4A20E2",
+        "code": "SUPER_HERO"
+    },
+    {
+        "name": "Sci-fi",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/SF.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_sf.png",
+        "index": 7,
+        "color": "2D4464",
+        "code": "SF"
+    },
+    {
+        "name": "Thriller",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/THRILLER.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_thriller.png",
+        "index": 8,
+        "color": "C00355",
+        "code": "THRILLER"
+    },
+    {
+        "name": "Supernatural",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/SUPERNATURAL.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_supernatural.png",
+        "index": 9,
+        "color": "7A41E9",
+        "code": "SUPERNATURAL"
+    },
+    {
+        "name": "Mystery",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/MYSTERY.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_others.png",
+        "index": 10,
+        "color": "434458",
+        "code": "MYSTERY"
+    },
+    {
+        "name": "Sports",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/SPORTS.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_sports.png",
+        "index": 11,
+        "color": "1BA8F2",
+        "code": "SPORTS"
+    },
+    {
+        "name": "Historical",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/HISTORICAL.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_historical.png",
+        "index": 12,
+        "color": "62422B",
+        "code": "HISTORICAL"
+    },
+    {
+        "name": "Heart-warming",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/HEARTWARMING.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_heartwarming.png",
+        "index": 13,
+        "color": "FD6900",
+        "code": "HEARTWARMING"
+    },
+    {
+        "name": "Horror",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/HORROR.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_horror.png",
+        "index": 14,
+        "color": "BE0000",
+        "code": "HORROR"
+    },
+    {
+        "name": "Informative",
+        "iconImage": "https://webtoons-static.pstatic.net/image/genre/icon/TIPTOON.png?dt=2022022201",
+        "mask": "https://webtoons-static.pstatic.net/image/genre/challenge_new_mask/mask_and_tiptoon.png",
+        "index": 15,
+        "color": "FF76CD",
+        "code": "TIPTOON"
+    }
+]

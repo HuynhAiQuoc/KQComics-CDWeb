@@ -6,6 +6,7 @@ import Carousel from 'react-bootstrap/Carousel'
 import './Home.css'
 import Card from '~/components/Card';
 import CarouselSlider from '~/components/CarouselSlider';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -17,10 +18,21 @@ import banner_4 from '~/assets/img/banner/banner_4.jpg';
 import banner_5 from '~/assets/img/banner/banner_5.jpg';
 import banner_6 from '~/assets/img/banner/banner_6.jpg';
 
+import genreLists from '~/data/genreLists.json'
+
+
+import { useState, useEffect } from 'react';
 
 const banners = [banner_1, banner_2, banner_3, banner_4, banner_5, banner_6];
 
 function Home() {
+
+    const [genres, setGenres] = useState([])
+
+    useEffect(() => {
+        setGenres(genreLists)
+    }, [])
+
 
     return (
         <>
@@ -58,13 +70,13 @@ function Home() {
                                                     <h5 className="text-white mb-1">TRUYỆN HOT</h5>
                                                 </div>
                                                 <CarouselSlider >
+                                                    {/* <Card />
                                                     <Card />
                                                     <Card />
                                                     <Card />
                                                     <Card />
                                                     <Card />
-                                                    <Card />
-                                                    <Card />
+                                                    <Card /> */}
                                                 </CarouselSlider>
                                             </div>
                                             <div >
@@ -72,13 +84,13 @@ function Home() {
                                                     <h5 className="text-white mb-1">TRUYỆN MỚI</h5>
                                                 </div>
                                                 <CarouselSlider >
+                                                    {/* <Card />
                                                     <Card />
                                                     <Card />
                                                     <Card />
                                                     <Card />
                                                     <Card />
-                                                    <Card />
-                                                    <Card />
+                                                    <Card /> */}
                                                 </CarouselSlider>
                                             </div>
                                             <div >
@@ -86,13 +98,13 @@ function Home() {
                                                     <h5 className="text-white mb-1">TRUYỆN MỚI CẬP NHẬT</h5>
                                                 </div>
                                                 <CarouselSlider >
+                                                    {/* <Card />
                                                     <Card />
                                                     <Card />
                                                     <Card />
                                                     <Card />
                                                     <Card />
-                                                    <Card />
-                                                    <Card />
+                                                    <Card /> */}
                                                 </CarouselSlider>
                                             </div>
                                             <div >
@@ -100,13 +112,13 @@ function Home() {
                                                     <h5 className="text-white mb-1">TRUYỆN</h5>
                                                 </div>
                                                 <CarouselSlider >
+                                                    {/* <Card />
                                                     <Card />
                                                     <Card />
                                                     <Card />
                                                     <Card />
                                                     <Card />
-                                                    <Card />
-                                                    <Card />
+                                                    <Card /> */}
                                                 </CarouselSlider>
                                             </div>
                                         </div>
@@ -119,87 +131,25 @@ function Home() {
                                                     Khám phá
                                                 </h4>
                                             </div>
-                                            <div className="row">
-                                                <a href="/">
-                                                    <div className="mt-2 mb-2">
-                                                        <div className="background-header d-flex align-items-center p-2 pe-3 rounded-3 explore-color--hover">
-                                                            <img src="https://inkr.com/images/explore/action.svg" alt="" />
-                                                            <span className="text-white ms-3">Action</span>
-                                                            <span className="text-white ms-auto">
-                                                                <FontAwesomeIcon icon={faAngleRight} />
-                                                            </span>
-                                                        </div>
+                                            {
+                                                genres.map((item, index) => (
+                                                    <div className="row" key={index}>
+                                                        <a href="/">
+                                                            <div className="mt-2 mb-2">
+                                                                <div className="background-header d-flex align-items-center pe-3 rounded-3 explore-color--hover">
+                                                                    <img src={item.iconImage} alt="" style={{ width: '56px' }} />
+                                                                    <span className="text-white ms-3">{item.name}</span>
+                                                                    <span className="text-white ms-auto">
+                                                                        <FontAwesomeIcon icon={faAngleRight} />
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
                                                     </div>
-                                                </a>
-                                            </div>
-                                            <div className="row">
-                                                <a href="/">
-                                                    <div className="mt-2 mb-2">
-                                                        <div className="background-header d-flex align-items-center p-2 pe-3 rounded-3 explore-color--hover">
-                                                            <img src="https://inkr.com/images/explore/adventure.svg" alt="" />
-                                                            <span className="text-white ms-3">Adventure</span>
-                                                            <span className="text-white ms-auto">
-                                                                <FontAwesomeIcon icon={faAngleRight} />
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div className="row">
-                                                <a href="/">
-                                                    <div className="mt-2 mb-2">
-                                                        <div className="background-header d-flex align-items-center p-2 pe-3 rounded-3 explore-color--hover">
-                                                            <img src="https://inkr.com/images/explore/romance.svg" alt="" />
-                                                            <span className="text-white ms-3">Romance</span>
-                                                            <span className="text-white ms-auto">
-                                                                <FontAwesomeIcon icon={faAngleRight} />
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
+                                                ))
+                                            }
 
-                                            <div className="row">
-                                                <a href="/">
-                                                    <div className="mt-2 mb-2">
-                                                        <div className="background-header d-flex align-items-center p-2 pe-3 rounded-3 explore-color--hover">
-                                                            <img src="https://inkr.com/images/explore/comedy.svg" alt="" />
-                                                            <span className="text-white ms-3">Comedy</span>
-                                                            <span className="text-white ms-auto">
-                                                                <FontAwesomeIcon icon={faAngleRight} />
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
 
-                                            <div className="row">
-                                                <a href="/">
-                                                    <div className="mt-2 mb-2">
-                                                        <div className="background-header d-flex align-items-center p-2 pe-3 rounded-3 explore-color--hover">
-                                                            <img src="https://inkr.com/images/explore/fantasy.svg" alt="" />
-                                                            <span className="text-white ms-3">Fantasy</span>
-                                                            <span className="text-white ms-auto">
-                                                                <FontAwesomeIcon icon={faAngleRight} />
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-
-                                            <div className="row">
-                                                <a href="/">
-                                                    <div className="mt-2 mb-2">
-                                                        <div className="background-header d-flex align-items-center p-2 pe-3 rounded-3 explore-color--hover">
-                                                            <img src="https://inkr.com/images/explore/horror.svg" alt="" />
-                                                            <span className="text-white ms-3">Horror</span>
-                                                            <span className="text-white ms-auto">
-                                                                <FontAwesomeIcon icon={faAngleRight} />
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

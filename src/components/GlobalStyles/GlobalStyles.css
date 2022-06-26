@@ -18,7 +18,7 @@ body {
     --height-header: 64px;
     --background-header: #1f1f1f;
     --red-color: #c8584a;
- 
+   
 }
 
 
@@ -169,6 +169,10 @@ input,
 select,
 button {
     outline: none;
+}
+
+select, option{
+    cursor: pointer;
 }
 
 ul {

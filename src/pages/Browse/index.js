@@ -1,19 +1,69 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
+import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Filter from './Filter/index.js'
 import Pagination from './Pagination/index.js'
 import Card from '~/components/Card';
+import './Browse.css'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-
-import { useState } from 'react';
+import data from '~/data/data.json'
 
 
 function Browse() {
 
+    const comicsInPage = 60;
+
+    const [listComics, setListComics] = useState(() => { return [...data]; });
     const [showFilter, setShowFilter] = useState(false);
     const [textFilterBtn, setTextFilterBtn] = useState("Lọc truyện");
+    const [comics, setComics] = useState([]);
+
+    // pagination state
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(() => {
+        if ((listComics.length) > comicsInPage) {
+            return Math.floor((listComics.length) / comicsInPage) + ((listComics.length % comicsInPage > 0) ? 1 : 0)
+        } else {
+            return 1;
+        }
+    });
+
+    // filter state
+    const [filterType, setFilterType] = useState([]);
+
+    // sort state
+    const [sort, setSort] = useState('Mặc định');
+
+    useEffect(() => {
+        sortComics(sort);
+        setCurrentPage(1);
+    }, [sort])
+
+    useEffect(() => {
+        filterComics();
+        setCurrentPage(1);
+    }, [filterType])
+
+    useEffect(() => {
+        getComicsPagination((currentPage - 1) * comicsInPage);
+        setTotalPages(calculateTotalPages(listComics))
+        window.scrollTo(0, 0);
+    }, [currentPage, listComics, sort, filterType]);
+
+
+    const getComicsPagination = (startIndex) => {
+        let array = [];
+        let temp = ((listComics.length % comicsInPage > 0) && (currentPage === totalPages)) ? (listComics.length % comicsInPage) : comicsInPage;
+        if ((listComics.length) <= comicsInPage) {
+            temp = listComics.length;
+        }
+        for (let i = 0; i < temp; i++) {
+            array.push(listComics[startIndex + i])
+        }
+        setComics(array);
+    }
 
     const handleShowFilter = () => {
         setShowFilter(pre => {
@@ -33,6 +83,78 @@ function Browse() {
         });
     }
 
+    const handleChangePage = (newPage) => {
+        setCurrentPage(newPage);
+    }
+
+    const handleChangeSort = (typeSort) => {
+        setSort(typeSort);
+    }
+
+    const handleChangeFilterType = (filterType) => {
+        setFilterType(filterType);
+    }
+
+    const filterComics = () => {
+        setListComics([...data])
+        if (filterType.length > 0) {
+            setListComics(data.filter(e => filterType.includes(e.representGenre)));
+        }
+    }
+
+    const calculateTotalPages = (lists) => {
+        if ((lists.length) > comicsInPage) {
+            return Math.floor((lists.length) / comicsInPage) + ((lists.length % comicsInPage > 0) ? 1 : 0)
+        } else {
+            return 1;
+        }
+    }
+
+    const sortAlphabet = (a, b) => {
+        if (a.title.toLowerCase() < b.title.toLowerCase()) {
+            return -1;
+        }
+        if (a.title.toLowerCase() > b.title.toLowerCase()) {
+            return 1;
+        }
+        return 0;
+    }
+
+    const sortAlphabetRevers = (a, b) => {
+        if (a.title.toLowerCase() < b.title.toLowerCase()) {
+            return 1;
+        }
+        if (a.title.toLowerCase() > b.title.toLowerCase()) {
+            return -1;
+        }
+        return 0;
+    }
+
+    const sortComics = (typeSort) => {
+        switch (typeSort) {
+            case 'Tên A-Z':
+                setListComics(listComics.sort(sortAlphabet));
+                break;
+            case 'Tên Z-A':
+                setListComics(listComics.sort(sortAlphabetRevers));
+                break;
+            case 'Lượt xem nhiều nhất':
+                setListComics(listComics.sort((a, b) => {
+                    return b.readCount - a.readCount;
+                }));
+                break;
+            case 'Lượt xem ít nhất':
+                setListComics(listComics.sort((a, b) => {
+                    return a.readCount - b.readCount;
+                }));
+                break;
+            case 'Mặc định':
+                setListComics(listComics);
+                break;
+            default: break;
+        }
+    }
+
     return (
         <>
             <div className="col-md-12 col-lg-9">
@@ -45,7 +167,7 @@ function Browse() {
                                         <FontAwesomeIcon icon={faArrowLeft} />
                                     </button>
                                     <div className="title">
-                                        <h4 className="text-white mb-1">Manga</h4>
+                                        {/* <h4 className="text-white mb-1">Manga</h4> */}
                                     </div>
                                 </div>
 
@@ -61,44 +183,33 @@ function Browse() {
 
                     <div className="row">
                         <div className="col-lg-3 d-lg-none d-block p-0">
-                            {showFilter && <Filter />}
+                            <div className={showFilter ? `d-block` : `d-none`}>
+                                <Filter handleChangeSort={handleChangeSort} handleChangeFilterType={handleChangeFilterType} />
+                            </div>
                         </div >
                     </div>
 
                     <div className="row">
-                        <div className="col-6 col-sm-4 col-md-3 five-columns p-2">
-                            <Card />
-                        </div>
-                        <div className="col-6 col-sm-4 col-md-3 five-columns p-2">
-                            <Card />
-                        </div>
-                        <div className="col-6 col-sm-4 col-md-3 five-columns p-2">
-                            <Card />
-                        </div>
-                        <div className="col-6 col-sm-4 col-md-3 five-columns p-2">
-                            <Card />
-                        </div>
-                        <div className="col-6 col-sm-4 col-md-3 five-columns p-2">
-                            <Card />
-                        </div>
-                        <div className="col-6 col-sm-4 col-md-3 five-columns p-2">
-                            <Card />
-                        </div>
-                        <div className="col-6 col-sm-4 col-md-3 five-columns p-2">
-                            <Card />
-                        </div>
-                        <div className="col-6 col-sm-4 col-md-3 five-columns p-2">
-                            <Card />
-                        </div>
-                        <div className="col-6 col-sm-4 col-md-3 five-columns p-2">
-                            <Card />
-                        </div>
-
+                        {
+                            (comics.length === 0)
+                                ?
+                                (<FontAwesomeIcon icon={faSpinner} className="loading-icon" />)
+                                :
+                                (
+                                    comics.map((comic) => (
+                                        <div key={comic.titleNo} className="col-6 col-sm-4 col-md-3 five-columns p-2">
+                                            <Card comic={comic} />
+                                        </div>
+                                    ))
+                                )
+                        }
                     </div>
 
                     <div className="row">
                         <div className="d-flex justify-content-center mt-4">
-                            <Pagination />
+                            {
+                                (totalPages > 1) ? <Pagination totalPages={totalPages} currentPage={currentPage} changePage={handleChangePage} /> : <></>
+                            }
                         </div>
                     </div>
                 </div>
@@ -107,7 +218,7 @@ function Browse() {
             <div className="col-lg-3 d-lg-block d-none p-0">
                 <div className="height-filter spacing-header overflow-auto fixed-custom width-inherit">
                     <div className=" border-start border-color-white">
-                        <Filter />
+                        <Filter handleChangeSort={handleChangeSort} handleChangeFilterType={handleChangeFilterType} />
                     </div>
                 </div>
             </div>

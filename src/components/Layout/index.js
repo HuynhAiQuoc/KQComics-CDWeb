@@ -6,7 +6,7 @@ function Layout({ children }) {
             <div className='row'>
                 <Header />
             </div>
-            <div className='row'>
+            <div className='row' style={{'minHeight': '100vh'}}>
                 {children}
             </div>
         </div>

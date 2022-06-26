@@ -2,17 +2,16 @@
 import './Filter.css';
 import { useState, useEffect } from 'react';
 
+import genreLists from '~/data/genreLists.json'
 
-const filterStatus = ["Tất cả", "Hoàn thành", "Đang tiến hành"];
-const filterTypes = ["Action", "Adventure", "Chuyển sinh", "Comic", "Cổ Đại", "Drama", "Anime", "Manhua", "Manhwa", "Shounen", "Shoujo", "Slice of Life", "Sports", "Supernatural", "Trinh thám", "Võ lâm", "Hài", "Huyền bí", "Tình cảm", "Thể loại khác"];
-const sortBys = ["Mặc định", "Mới nhất", "Cũ nhất", "Tên A-Z", "Tên Z-A", "Lượt xem nhiều nhất", "Lượt xem ít nhất"];
+const sortBys = ["Mặc định", "Tên A-Z", "Tên Z-A", "Lượt xem nhiều nhất", "Lượt xem ít nhất"];
 
 
-function Filter() {
+function Filter(props) {
 
-    const [filterStatusValue, setFilterStatusValue] = useState(filterStatus[0]);
     const [filterTypeValue, setFilterTypeValue] = useState([]);
     const [displayFilterBtn, setDisplayFilterBtn] = useState(false);
+    const [sort, setSort] = useState(sortBys[0]);
 
     const handleChangeFilterType = (item) => {
         setFilterTypeValue(pre => {
@@ -25,19 +24,28 @@ function Filter() {
     }
 
     const handleClearFilter = () => {
-        setFilterStatusValue(filterStatus[0]);
         setFilterTypeValue([]);
+        setSort(sortBys[0])
     }
+ 
+    const handleChangeSort = (event) => {
+        setSort(event.target.value);
+    }
+
+    useEffect(() => {
+        props.handleChangeSort(sort);
+    }, [sort])
 
 
     useEffect(() => {
-        if ((filterTypeValue.length > 0) || (filterStatusValue !== filterStatus[0])) {
+        if ((filterTypeValue.length > 0)) {
             setDisplayFilterBtn(true);
         } else {
             setDisplayFilterBtn(false);
         }
-    }, [filterStatusValue, filterTypeValue]);
-
+        setSort(sortBys[0])
+        props.handleChangeFilterType(filterTypeValue);
+    }, [filterTypeValue]);
 
 
     return (
@@ -75,19 +83,18 @@ function Filter() {
                             <div className="filter-item-content">
                                 <div className="check-group">
                                     <div className="row">
-
                                         {
-                                            filterTypes.map((item, index) => (
-                                                <div className="col-6 col-md-4 col-lg-6" key={index}>
+                                            genreLists.map((item) => (
+                                                <div className="col-6 col-md-4 col-lg-6" key={item.index}>
                                                     <div className="check-item mb-2">
                                                         <label className="d-flex align-items-center">
                                                             <input type="checkbox"
                                                                 className="filter-check-input filter-input"
-                                                                checked={filterTypeValue.includes(item)}
-                                                                onChange={() => handleChangeFilterType(item)}
+                                                                checked={filterTypeValue.includes(item.code)}
+                                                                onChange={() => handleChangeFilterType(item.code)}
                                                             />
                                                             <span className="check-item-text ms-2">
-                                                                {item}
+                                                                {item.name}
                                                             </span>
                                                         </label>
                                                     </div>
@@ -109,53 +116,6 @@ function Filter() {
 
                 <div className="row">
                     <div className="col-12">
-                        <div className="filter-item">
-                            <div className="filter-item-title">
-                                <p className="text-start">
-                                    Release Status
-                                </p>
-                            </div>
-                            <div className="filter-item-content">
-                                <div className="radio-group">
-                                    <form>
-                                        <div className="row">
-
-                                            {
-                                                filterStatus.map((item, index) => (
-                                                    <div className="col-6 col-md-3 col-lg-6" key={index}>
-                                                        <div className="radio-item mb-2">
-                                                            <label className="d-flex align-items-center">
-                                                                <input type="radio"
-                                                                    className="filter-radio-input filter-input"
-                                                                    checked={item === filterStatusValue}
-                                                                    value=""
-                                                                    onChange={() => setFilterStatusValue(item)}
-                                                                />
-                                                                <span className="radio-item-text ms-2">
-                                                                    {item}
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                ))
-                                            }
-
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="col-sm-12">
-                        <div className="border-bottom border-color-white mt-4 mb-3"></div>
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="col-12">
                         <div className="filter-item-title">
                             <p className="text-start">
                                 Sort By
@@ -163,11 +123,13 @@ function Filter() {
                         </div>
                         <div className="sort text-white border border-color-white rounded-3 p-1 ps-3">
                             <select className="w-100 form-select-md bg-transparent text-white border-0"
-                                aria-label="select example">
+                                aria-label="select example"
+                                value={sort}
+                                onChange={handleChangeSort}
+                            >
                                 {
                                     sortBys.map((item, index) => (
-                                        <option className="background-black" key={index} value="">{item}</option>
-
+                                        <option className="background-black" key={index} value={item}>{item}</option>
                                     ))
                                 }
                             </select>

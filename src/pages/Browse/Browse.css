@@ -1,0 +1,17 @@
+
+
+.loading-icon{
+    font-size: 35px;
+    color: var(--white-color);
+    margin-top: 30px;
+    animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
