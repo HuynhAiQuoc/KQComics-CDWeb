@@ -3,3 +3,9 @@
 .explore-color--hover:hover{
     background-color: var(--gray-color);
 }
+
+.img-banner{
+    max-height: 242px;
+    object-fit: cover;
+    border-radius: 8px
+}

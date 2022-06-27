@@ -18,7 +18,7 @@ body {
     --height-header: 64px;
     --background-header: #1f1f1f;
     --red-color: #c8584a;
-   
+
 }
 
 
@@ -32,7 +32,7 @@ html {
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
 }
- 
+
 
 
 @media (min-width: 1200px) {
@@ -56,9 +56,7 @@ html {
         height: var(--height-header);
     }
 
-    .nav-link--active::after {
-        bottom: -20px;
-    }
+
 }
 
 @media (max-width: 991px) {
@@ -70,9 +68,7 @@ html {
         height: 48px;
     }
 
-    .nav-link--active::after {
-        bottom: -1px;
-    }
+
 }
 
 
@@ -118,28 +114,7 @@ html {
 }
 
 
-.nav-link {
-    color: var(--white-color);
-    font-weight: 500;
-    position: relative;
-}
-
- 
-.nav-link--active {
-    color: var(--yellow-color);
-}
-
-.nav-link--active::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background-color: var(--yellow-color);
-    left: 0;
-    transition: all .2s ease-in-out;
-}
-
-.fixed-custom{
+.fixed-custom {
     position: fixed;
     top: 0;
     right: 0;
@@ -148,10 +123,11 @@ html {
 
 
 
-.rounded-4{
+.rounded-4 {
     border-radius: 8px;
 }
-.rounded-5{
+
+.rounded-5 {
     border-radius: 12px;
 }
 
@@ -161,7 +137,7 @@ label {
     cursor: pointer;
 }
 
-input{
+input {
     caret-color: var(--white-color);
 }
 
@@ -171,7 +147,8 @@ button {
     outline: none;
 }
 
-select, option{
+select,
+option {
     cursor: pointer;
 }
 
@@ -180,7 +157,7 @@ ul {
     list-style: none;
 }
 
-a{
+a {
     text-decoration: none;
 }
 

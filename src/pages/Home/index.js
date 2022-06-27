@@ -2,7 +2,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel'
 
-
 import './Home.css'
 import Card from '~/components/Card';
 import CarouselSlider from '~/components/CarouselSlider';
@@ -10,9 +9,10 @@ import CarouselSlider from '~/components/CarouselSlider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-
 import genreLists from '~/data/genreLists.json'
 import data from '~/data/data.json'
+
+import { Link } from 'react-router-dom'
 
 import { useState } from 'react';
 
@@ -37,12 +37,8 @@ function Home() {
         for (let i = 0; i < 50; i++) { result.push(tem[i]) }
         return result;
     })
- 
-    const myStyle = {
-        'maxHeight': '242px',
-        'objectFit': 'cover',
-        'borderRadius': '8px'
-    }
+
+
 
     return (
         <>
@@ -61,8 +57,7 @@ function Home() {
                                         <Carousel.Item key={index}>
                                             <a href="">
                                                 <img
-                                                    className="d-block w-100"
-                                                    style={myStyle}
+                                                    className="d-block w-100 img-banner"
                                                     src={'https://webtoon-phinf.pstatic.net' + banner.bgNewIpad}
                                                     alt="First slide"
                                                 />
@@ -98,16 +93,16 @@ function Home() {
                                                     {
                                                         suggestComics.map((comic) => (
                                                             <div key={comic.titleNo} className="col-6 col-sm-4 col-md-3 five-columns p-2">
-                                                            <Card comic={comic} />
-                                                        </div>
+                                                                <Card comic={comic} />
+                                                            </div>
                                                         ))
                                                     }
                                                 </div>
                                             </div>
-                                           
+
                                         </div>
                                     </div>
-                            
+
                                     <div className="col-lg-3 d-lg-block d-none p-0">
                                         <div className="explore mt-4 ps-3 pe-2">
                                             <div className="row">
@@ -118,7 +113,7 @@ function Home() {
                                             {
                                                 genres.map((item, index) => (
                                                     <div className="row" key={index}>
-                                                        <a href="/">
+                                                        <Link to={`/browse?genre=` + item.code}>
                                                             <div className="mt-2 mb-2">
                                                                 <div className="background-header d-flex align-items-center pe-3 rounded-3 explore-color--hover">
                                                                     <img src={item.iconImage} alt="" style={{ width: '56px' }} />
@@ -128,7 +123,7 @@ function Home() {
                                                                     </span>
                                                                 </div>
                                                             </div>
-                                                        </a>
+                                                        </Link>
                                                     </div>
                                                 ))
                                             }

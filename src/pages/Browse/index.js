@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
+import { useSearchParams } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Filter from './Filter/index.js'
@@ -15,6 +16,9 @@ function Browse() {
 
     const comicsInPage = 60;
 
+    const [searchParams] = useSearchParams();
+
+    const [initialGenre, setInitialGenre] = useState('');
     const [listComics, setListComics] = useState(() => { return [...data]; });
     const [showFilter, setShowFilter] = useState(false);
     const [textFilterBtn, setTextFilterBtn] = useState("Lọc truyện");
@@ -36,6 +40,17 @@ function Browse() {
     // sort state
     const [sort, setSort] = useState('Mặc định');
 
+
+    useEffect(() => {
+        const genre = searchParams.get('genre');
+        if (genre) {
+            setInitialGenre(genre);
+            // searchParams.delete('genre');
+            // setSearchParams(searchParams);
+        }
+    }, [])
+
+
     useEffect(() => {
         sortComics(sort);
         setCurrentPage(1);
@@ -47,8 +62,8 @@ function Browse() {
     }, [filterType])
 
     useEffect(() => {
-        getComicsPagination((currentPage - 1) * comicsInPage);
         setTotalPages(calculateTotalPages(listComics))
+        getComicsPagination((currentPage - 1) * comicsInPage);
         window.scrollTo(0, 0);
     }, [currentPage, listComics, sort, filterType]);
 
@@ -184,7 +199,11 @@ function Browse() {
                     <div className="row">
                         <div className="col-lg-3 d-lg-none d-block p-0">
                             <div className={showFilter ? `d-block` : `d-none`}>
-                                <Filter handleChangeSort={handleChangeSort} handleChangeFilterType={handleChangeFilterType} />
+                                <Filter
+                                    initialGenre={initialGenre}
+                                    handleChangeSort={handleChangeSort}
+                                    handleChangeFilterType={handleChangeFilterType}
+                                />
                             </div>
                         </div >
                     </div>
@@ -208,7 +227,9 @@ function Browse() {
                     <div className="row">
                         <div className="d-flex justify-content-center mt-4">
                             {
-                                (totalPages > 1) ? <Pagination totalPages={totalPages} currentPage={currentPage} changePage={handleChangePage} /> : <></>
+                                (totalPages > 1) ? <Pagination totalPages={totalPages}
+                                    currentPage={currentPage}
+                                    changePage={handleChangePage} /> : <></>
                             }
                         </div>
                     </div>
@@ -218,7 +239,11 @@ function Browse() {
             <div className="col-lg-3 d-lg-block d-none p-0">
                 <div className="height-filter spacing-header overflow-auto fixed-custom width-inherit">
                     <div className=" border-start border-color-white">
-                        <Filter handleChangeSort={handleChangeSort} handleChangeFilterType={handleChangeFilterType} />
+                        <Filter
+                            initialGenre={initialGenre}
+                            handleChangeSort={handleChangeSort}
+                            handleChangeFilterType={handleChangeFilterType}
+                        />
                     </div>
                 </div>
             </div>

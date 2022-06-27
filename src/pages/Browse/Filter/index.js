@@ -1,6 +1,7 @@
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import './Filter.css';
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom'
 
 import genreLists from '~/data/genreLists.json'
 
@@ -8,6 +9,8 @@ const sortBys = ["Mặc định", "Tên A-Z", "Tên Z-A", "Lượt xem nhiều n
 
 
 function Filter(props) {
+
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const [filterTypeValue, setFilterTypeValue] = useState([]);
     const [displayFilterBtn, setDisplayFilterBtn] = useState(false);
@@ -23,11 +26,18 @@ function Filter(props) {
         })
     }
 
+    useEffect(() => {
+        handleChangeFilterType(props.initialGenre);
+    }, [props.initialGenre])
+
+
     const handleClearFilter = () => {
         setFilterTypeValue([]);
-        setSort(sortBys[0])
+        setSort(sortBys[0]);
+        searchParams.delete('genre');
+        setSearchParams(searchParams);
     }
- 
+
     const handleChangeSort = (event) => {
         setSort(event.target.value);
     }
