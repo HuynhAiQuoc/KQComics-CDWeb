@@ -9,21 +9,21 @@ function Navbar() {
 
     return (
         <>
-            <ul className="navbar-nav-custom m-0 d-flex ps-lg-5 pe-lg-5">
+            <ul className="navbar-nav-custom m-0 d-flex ps-lg-2 pe-lg-2">
                 <li className="nav-item">
                     <NavLink
                         to="/"
                         className="nav-link"
                     >
-                        Home
+                        Trang chủ
                     </NavLink>
                 </li>
-                <li className="nav-item dropdown">
+                <li className="nav-item">
                     <NavLink
                         to="/browse"
                         className="nav-link"
                     >
-                        Browse
+                        Danh sách
                     </NavLink>
                     {/* <a className="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink"
                         role="button" data-bs-toggle="dropdown" aria-expanded="false">

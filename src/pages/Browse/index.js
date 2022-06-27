@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Filter from './Filter/index.js'
-import Pagination from './Pagination/index.js'
+import Pagination from './Pagination'
 import Card from '~/components/Card';
 import './Browse.css'
 
@@ -45,8 +45,6 @@ function Browse() {
         const genre = searchParams.get('genre');
         if (genre) {
             setInitialGenre(genre);
-            // searchParams.delete('genre');
-            // setSearchParams(searchParams);
         }
     }, [])
 
@@ -65,7 +63,7 @@ function Browse() {
         setTotalPages(calculateTotalPages(listComics))
         getComicsPagination((currentPage - 1) * comicsInPage);
         window.scrollTo(0, 0);
-    }, [currentPage, listComics, sort, filterType]);
+    }, [currentPage, listComics, sort, filterType, totalPages]);
 
 
     const getComicsPagination = (startIndex) => {

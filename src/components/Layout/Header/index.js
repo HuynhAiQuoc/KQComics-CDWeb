@@ -32,7 +32,7 @@ function Header() {
                 <div className="col-sm-12">
                     <div className="row">
                         <div className="d-flex align-items-center justify-content-between header-height ps-3 pe-4">
-                            <div className="d-flex align-items-center w-85">
+                            <div className="d-flex align-items-center justify-content-between w-85">
                                 <div className="logo">
                                     <a href="/">
                                         <img src={logo} width="50" alt="logo" className="img-fluid" />
@@ -43,7 +43,7 @@ function Header() {
                                     <Navbar />
                                 </div>
 
-                                <div className="search-bar w-60 d-lg-block d-none">
+                                <div className="search-bar w-53 d-lg-block d-none">
 
                                     <SearchField />
 

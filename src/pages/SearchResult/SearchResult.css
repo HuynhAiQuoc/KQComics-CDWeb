@@ -1,0 +1,14 @@
+
+
+@media (min-width: 768px) {
+    .search-title {
+        height: 72px;
+    }
+}
+
+
+@media (max-width: 767px) {
+    .search-title {
+        height: 52px;
+    }
+}

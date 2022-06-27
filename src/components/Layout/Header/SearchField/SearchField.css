@@ -31,8 +31,10 @@ div[data-tippy-root] {
 }
 
 .search-result-item--img {
-    width: 40px;
     margin-right: 10px;
+    height: 55px;
+    width: 45px;
+    object-fit: cover;
 }
 
 .search-result-item--info {

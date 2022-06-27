@@ -55,8 +55,14 @@ html {
     .header-height {
         height: var(--height-header);
     }
+  
+}
 
-
+@media (min-width: 992px) and (max-width: 1199px){
+    .five-columns-search {
+        width: 20%;
+        *width: 20%;
+    }
 }
 
 @media (max-width: 991px) {
@@ -178,4 +184,8 @@ a {
 
 .w-60 {
     width: 60%;
+}
+
+.w-53{
+    width: 53%;
 }
