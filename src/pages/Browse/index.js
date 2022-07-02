@@ -179,6 +179,7 @@ function Browse() {
                                     <button className="d-lg-none d-block btn btn-previous text-white me-2">
                                         <FontAwesomeIcon icon={faArrowLeft} />
                                     </button>
+                                    
                                     <div className="title">
                                         {/* <h4 className="text-white mb-1">Manga</h4> */}
                                     </div>
@@ -236,7 +237,7 @@ function Browse() {
 
             <div className="col-lg-3 d-lg-block d-none p-0">
                 <div className="height-filter spacing-header overflow-auto fixed-custom width-inherit">
-                    <div className=" border-start border-color-white">
+                    <div className="border-start border-color-white h-100">
                         <Filter
                             initialGenre={initialGenre}
                             handleChangeSort={handleChangeSort}

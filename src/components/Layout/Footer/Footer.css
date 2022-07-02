@@ -1,0 +1,134 @@
+
+.footer {
+    background: #141414;
+    box-shadow: inset 0 1px 0 #303030;
+    padding: 0;
+}
+
+.footer-panel {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    position: relative;
+    margin: auto;
+    padding: 32px 24px;
+    width: 100%;
+    max-width: 1008px;
+}
+
+@media screen and (min-width:1200px) {
+    .footer-panel {
+        max-width: 1216px;
+    }
+}
+
+@media screen and (min-width:1600px) {
+    .footer-panel {
+        max-width: 1616px;
+    }
+}
+
+.footer-panel a {
+    text-decoration: none;
+}
+
+.footer-panel {
+    -webkit-flex: 1 1;
+    flex: 1 1;
+}
+
+.footer-panel-sub {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-panel-sub-division {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    position: relative;
+    -webkit-flex: 1 1;
+    flex: 1 1;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    text-align: right;
+}
+
+.ant-footer-anticon {
+    text-align: left;
+    color: var(--white-color);
+}
+
+.ant-footer-anticon-img {
+    width: 107px;
+    cursor: pointer;
+}
+
+.ant-footer-anticon-social-media {
+    margin: 34px 0 16px;
+}
+
+.ant-footer-anticon-more-information {
+    list-style: none;
+    text-align: left;
+}
+
+.ant-footer-label .label-component {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px;
+    color: rgba(255, 255, 255, .65);
+}
+
+.ant-footer-label.sp-label {
+    margin-bottom: 10px;
+}
+
+.ant-footer-label.sp-label .label-component {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+    color: rgba(255, 255, 255, .85);
+}
+
+.app-store {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+}
+
+.app-store img {
+    height: 42px;
+}
+
+.app-store:last-child {
+    margin-top: 11px;
+}
+
+@media screen and (min-width:1600px) {
+    .app-store {
+        display: inline-block;
+    }
+
+    .app-store:last-child {
+        margin-left: 20px;
+    }
+}
+
+.social-media-component {
+    color: rgba(255, 255, 255, .65) !important;
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.footer-social-icon{
+    color: var(--white-color);
+    margin-right: 14px;
+    font-size: 25px;
+}

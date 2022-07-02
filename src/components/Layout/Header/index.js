@@ -68,7 +68,7 @@ function Header() {
                                     className="signin-btn rounded-3 bg-transparent text-yellow border border-color-yellow ps-3 pe-3">
                                     <FontAwesomeIcon icon={faUserPlus} className="d-lg-block d-none" />
                                     <i className="fa fa-user me-2 "></i>
-                                    Sign in
+                                    Đăng nhập
                                 </button>
 
                                 <Account showModal={showModal} onClose={()=>setShowModal(false)} />
@@ -93,7 +93,7 @@ function Header() {
                                             onClick={handleShowSearchField}
                                         >
                                             <span className="text-white ">
-                                                Cancel
+                                                Đóng
                                             </span>
                                         </button>
                                     </div>
