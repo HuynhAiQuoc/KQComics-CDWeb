@@ -180,7 +180,7 @@
 }
 
 
-.modal-dialog {
+.comment-container .modal-dialog {
     position: absolute;
     right: 0;
     top: 0;
@@ -191,7 +191,7 @@
 }
  
 
-.modal-content {
+.comment-container .modal-content {
     height: 100%;
     width: 100%;
     max-width: 535px;

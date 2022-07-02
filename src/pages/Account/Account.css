@@ -2,7 +2,11 @@
     padding: 0;
 }
 
-.modal-content {
+.account-container .modal-dialog{
+    position: relative;
+}
+
+.account-container .modal-content {
     max-width: 440px;
     border: none;
     padding: 20px 20px 24px 20px;

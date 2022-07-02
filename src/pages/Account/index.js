@@ -33,10 +33,11 @@ function Account(props) {
 
 
     return (
-        <div>
+        <div >
             <Modal
                 show={props.showModal}
                 onHide={props.onClose}
+                className="account-container"
             >
                 <Modal.Header className="border-0">
                     {

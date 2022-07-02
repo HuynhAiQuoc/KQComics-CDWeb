@@ -16,6 +16,7 @@ function Comment(props) {
             <Modal
                 show={props.showModal}
                 onHide={props.onClose}
+                className="comment-container"
             >
                 <Modal.Header className="border-0 modal-comment-header">
                     <p className="m-0 modal-comment-title">3 Comments</p>
