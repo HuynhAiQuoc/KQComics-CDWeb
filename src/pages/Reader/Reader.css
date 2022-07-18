@@ -1,0 +1,73 @@
+
+.header-height-reader{
+    height: var(--height-header);
+}
+
+
+.previous-icon {
+    font-size: 25px;
+}
+
+.previous-icon:not(:disabled):hover {
+    color: var(--yellow-color) !important;
+}
+
+.change-episode-btn {
+    font-size: 22px;
+    color: var(--gray-color-light);
+}
+
+.change-episode-btn:not(:disabled):hover {
+    color: var(--yellow-color) !important;
+}
+
+.list-episode-btn:hover {
+    color: var(--yellow-color) !important;
+}
+
+.title-hover:hover {
+    color: var(--yellow-color) !important;
+}
+
+
+.tippy-episode-list div[data-tippy-root] {
+    top: -5px !important;
+    width: 200px;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important; 
+    margin-right: auto !important; 
+    transform: translate(0px, 69px) !important;
+}
+
+
+.box-list-episode {
+    background-color: var(--background-header);
+    padding: 8px 0;
+    border-radius: 5px;
+    overflow-y: auto;
+    max-height: 252px;
+}
+
+.episode-link {
+    color: var(--text-white);
+    display: flex;
+}
+
+.episode-link--active{
+    background-color: var(--yellow-color);
+    color: var( --black-color);
+}
+
+.episode-link:hover {
+    color: var(--yellow-color) !important;
+    background-color:var(--gray-color);
+}
+
+.episode-link-inner {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    background: transparent;
+}

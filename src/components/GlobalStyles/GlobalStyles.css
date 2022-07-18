@@ -8,17 +8,18 @@ body {
 } */
 
 :root {
-    --max-height-img-card: 230px;
     --white-color: rgb(207, 207, 207);
     --gray-color: #434343;
     --gray-color-light: #7e7e7e;
     --black-color: #000;
     --background-color-black: #000;
     --yellow-color: #F6D501;
-    --height-header: 64px;
     --background-header: #1f1f1f;
     --red-color: #c8584a;
-
+    
+    
+    --height-header: 64px;
+    --max-height-img-card: 230px;
 }
 
 

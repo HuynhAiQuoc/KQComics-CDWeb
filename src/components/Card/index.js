@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 
+import { Link } from 'react-router-dom';
 
 function Card(props) {
 
@@ -21,7 +22,7 @@ function Card(props) {
 
     return (
         <>
-            <a href="#">
+           <Link to={`/detail?titleNo=` + props.comic.titleNo}>
                 <div className="card border-0 mb-1">
                     <div className="img-container">
                         <img className="card-img-top card-img-container rounded-3"
@@ -56,7 +57,7 @@ function Card(props) {
                         </h5>
                     </div>
                 </div>
-            </a>
+           </Link>
 
         </>
     );

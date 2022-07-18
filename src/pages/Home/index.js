@@ -55,13 +55,13 @@ function Home() {
                                 >
                                     {banners.map((banner, index) => (
                                         <Carousel.Item key={index}>
-                                            <a href="">
+                                            <Link to={`/detail?titleNo=` + banner.titleNo}>
                                                 <img
                                                     className="d-block w-100 img-banner"
                                                     src={'https://webtoon-phinf.pstatic.net' + banner.bgNewIpad}
                                                     alt="First slide"
                                                 />
-                                            </a>
+                                            </Link>
                                         </Carousel.Item>
                                     ))}
                                 </Carousel>

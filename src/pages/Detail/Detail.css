@@ -14,8 +14,8 @@
 
 @media (max-width: 991px) {
     .story-image {
-        width: 120px;
-        height: 180px;
+        width: 140px;
+        height: 200px;
     }
 }
 
@@ -25,7 +25,7 @@
     }
 
     .story-image {
-        width: 180px;
+        width: 200px;
         height: 270px;
     }
 }
@@ -49,6 +49,7 @@
 
 .story-image {
     border-radius: 5px;
+    object-fit: cover;
 }
 
 .story-information {
@@ -150,6 +151,8 @@
     color: var(--white-color);
     border: 1px solid var(--gray-color-light);
     border-radius: 5px;
+    width: 32px;
+    height: 32px;
     /* position: relative; */
 }
 
@@ -175,8 +178,9 @@
 }
 
 .chapter-item>img {
-    width: 76px;
+    width: 70px;
     height: 62px;
+    object-fit: revert;
 }
 
 

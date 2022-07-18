@@ -224,7 +224,7 @@ function Browse() {
                     </div>
 
                     <div className="row">
-                        <div className="d-flex justify-content-center mt-4">
+                        <div className="d-flex justify-content-center mt-4 mb-4">
                             {
                                 (totalPages > 1) ? <Pagination totalPages={totalPages}
                                     currentPage={currentPage}

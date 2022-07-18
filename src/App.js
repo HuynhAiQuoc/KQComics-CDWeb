@@ -5,6 +5,7 @@ import Browse from '~/pages/Browse/index.js';
 import Layout from '~/components/Layout/index.js';
 import SearchResult from '~/pages/SearchResult/index.js';
 import Detail from './pages/Detail/index.js';
+import Reader from './pages/Reader/index.js'
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
           <Route path="/search" element={<Layout><SearchResult /></Layout>} />
 
           <Route path="/detail" element={<Layout><Detail /></Layout>} />
+
+          <Route path="/reader" element={<Reader />} />
         </Routes>
       </div>
     </Router>

@@ -7,7 +7,7 @@
 
 }
 
-div[data-tippy-root] {
+.tippy-search div[data-tippy-root] {
     width: 100% !important;
     transform: translate(0px, 36px) !important;
 }
