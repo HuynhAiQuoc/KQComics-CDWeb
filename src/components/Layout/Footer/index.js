@@ -23,7 +23,7 @@ function Footer() {
                                     <FontAwesomeIcon className="footer-social-icon" icon={faInstagramSquare} />
                                     <FontAwesomeIcon className="footer-social-icon" icon={faLinkedin} />
                                 </div>
-                                <span className="ant-typography ant-typography-secondary">KQ © 2022</span>
+                                {/* <span className="ant-typography ant-typography-secondary">KQ © 2022</span> */}
                             </div>
                             <ul className="ant-footer-anticon-more-information">
                                 <li className="ant-footer-label sp-label">

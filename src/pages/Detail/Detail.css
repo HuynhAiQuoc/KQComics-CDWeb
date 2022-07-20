@@ -61,6 +61,11 @@
     border-radius: 8px;
     border: none;
     height: 32px;
+    max-width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--black-color);
 }
 
 

@@ -1,6 +1,21 @@
 
-.header-height-reader{
+.disable-link{
+    pointer-events: none;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.header-height-reader {
     height: var(--height-header);
+}
+
+.redirect-home-btn {
+    color: var(--white-color);
+    font-size: 22px;
+}
+
+.redirect-home-btn:hover {
+    color: var(--yellow-color);
 }
 
 
@@ -15,6 +30,8 @@
 .change-episode-btn {
     font-size: 22px;
     color: var(--gray-color-light);
+    border: none;
+    background-color: transparent;
 }
 
 .change-episode-btn:not(:disabled):hover {
@@ -35,8 +52,8 @@
     width: 200px;
     left: 0 !important;
     right: 0 !important;
-    margin-left: auto !important; 
-    margin-right: auto !important; 
+    margin-left: auto !important;
+    margin-right: auto !important;
     transform: translate(0px, 69px) !important;
 }
 
@@ -50,18 +67,18 @@
 }
 
 .episode-link {
-    color: var(--text-white);
+    color: var(--white-color);
     display: flex;
 }
 
-.episode-link--active{
+.episode-link--active {
     background-color: var(--yellow-color);
-    color: var( --black-color);
+    color: var(--black-color);
 }
 
 .episode-link:hover {
     color: var(--yellow-color) !important;
-    background-color:var(--gray-color);
+    background-color: var(--gray-color);
 }
 
 .episode-link-inner {
@@ -70,4 +87,52 @@
     align-items: center;
     padding: 0 20px;
     background: transparent;
+}
+
+.change-episode-footer {
+    display: flex;
+    width: 280px;
+    margin: 32px auto;
+    justify-content: space-around;
+
+}
+
+.change-episode-footer-btn {
+    display: flex;
+    height: 36px;
+    background-color: var(--red-color);
+    width: 110px;
+    padding: 0 5px;
+    align-items: center;
+    justify-content: space-around;
+    color: var(--white-color);
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.change-episode-footer-btn:hover{
+    color: var(--white-color);
+    opacity: 0.8;
+}
+
+
+.scroll-top-element{
+    bottom: 30px;
+    right: 30px;
+}
+
+.scroll-top-element-btn{
+    border:none;
+    border-radius: 50%;
+    background-color: var(--red-color);
+    color: var(--white-color);
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    opacity: .6;
+}
+
+.scroll-top-element-btn:hover{
+    opacity: 1;
 }

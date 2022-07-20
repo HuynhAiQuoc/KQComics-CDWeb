@@ -1,24 +1,114 @@
+import React from 'react';
+
 import './Reader.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleLeft, faAngleRight, faLongArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleLeft, faAngleRight, faAngleUp, faArrowUp, faHome, faListUl, faLongArrowUp, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 import Tippy from '@tippyjs/react/headless';
 // import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
 
-
 import { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom'
+import Footer from '~/components/Layout/Footer'
+
+const options = {
+    method: 'GET',
+    headers: {
+        'X-RapidAPI-Key': '626395e262msh02ba9742602b4e1p1d8a23jsnc6576cb24819',
+        'X-RapidAPI-Host': 'webtoon.p.rapidapi.com'
+    }
+};
+
+const setEpisodeUrl = (titleNo) => {
+    // return 'https://webtoon.p.rapidapi.com/originals/episodes/list?titleNo=' + titleNo + '&language=en'
+}
+
+const setInforUrl = (titleNo, episodeNo) => {
+    // return 'https://webtoon.p.rapidapi.com/originals/episodes/get-info?titleNo=' + titleNo + '&episodeNo=' + episodeNo + '&language=en';
+}
+
+function getDataAPI(url) {
+    return fetch(url, options)
+        .then((response) => response.json())
+        .then(res => {
+            return res;
+        })
+        .catch(error => {
+        });
+}
+
 
 function Reader() {
 
+    const [searchParams] = useSearchParams();
     const [showEpisodeList, setShowEpisodeList] = useState(false);
+    const [visibleTopBtn, setVisibleTopBtn] = useState(false);
+
+    const [titleNo] = useState(() => { return searchParams.get('titleNo'); })
+
+    const [currentEpisode, setCurrentEpisode] = useState(() => {
+        return parseInt(searchParams.get('episodeNo'));
+    });
+
+    const [episodes, setEpisodes] = useState(
+        [{
+            "episodeNo": 107,
+            "titleNo": 2113,
+            "episodeTitle": "(S2) Episode 50",
+            "thumbnailImageUrl": "/20220609_167/16547143908824EtFM_PNG/thumb_165471436252121131075.png?type=q70",
+        }]
+    );
+
+    const [firstEpisode, setFirstEpisode] = useState(0)
+
+    const [lastEpisode, setLastEpisode] = useState(0)
+
+    const [titleCurrentEpisode, setTitleCurrentEpisode] = useState(null)
 
     const episodeRef = useRef();
+
+    const [listImages, setListImages] = useState(
+        [
+            {
+                "sortOrder": 1,
+                "cutId": 315,
+                "url": "/20210716_109/1626380107606NjqzR_JPEG/1626380103911309311.jpg?type=q70",
+            }
+        ]
+    )
+
+    const getTitleEpisode = () => {
+        const ob = episodes.find(obj => {
+            return (currentEpisode === obj.episodeNo)
+        });
+        return ob ? ob.episodeTitle : ''
+    }
 
     const handleShowEpisodeList = () => {
         setShowEpisodeList(!showEpisodeList);
     }
+
+    useEffect(() => {
+        getDataAPI(setEpisodeUrl(titleNo)).then(res => {
+            setEpisodes((res.message.result.episodeList.episode).sort((a, b) => b.episodeNo - a.episodeNo))
+        })
+    }, [])
+
+
+    useEffect(() => {
+        getDataAPI(setInforUrl(titleNo, currentEpisode)).then(res => {
+            setListImages((res.message.result.episodeInfo.imageInfo).sort((a, b) => a.sortOrder - b.sortOrder))
+        })
+    }, [titleNo, currentEpisode])
+
+
+    useEffect(() => {
+        setFirstEpisode(episodes[episodes.length - 1].episodeNo);
+        setLastEpisode(episodes[0].episodeNo);
+    }, [episodes])
+
 
     useEffect(() => {
         const handler = (event) => {
@@ -30,39 +120,68 @@ function Reader() {
         return () => {
             document.removeEventListener("mousedown", handler);
         }
+    }, []);
+
+    useEffect(() => {
+        setCurrentEpisode(parseInt(searchParams.get('episodeNo')));
     })
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+        setTitleCurrentEpisode(getTitleEpisode);
+        setShowEpisodeList(false);
+    }, [currentEpisode, episodes])
+
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
+
+
+    const toggleVisible = () => {
+        const scrolled = document.documentElement.scrollTop;
+        if (scrolled > 300) {
+            setVisibleTopBtn(true)
+        }
+        else if (scrolled <= 300) {
+            setVisibleTopBtn(false)
+        }
+    };
+
+
+    window.addEventListener('scroll', toggleVisible);
 
     return (
         <>
             <div className='container-xxl'>
                 <div className='row'>
                     <div className='background-header header-height-reader fixed-top'>
-                        <div className="d-flex align-items-center justify-content-between h-100 ps-5 pe-4">
+                        <div className="d-flex align-items-center justify-content-center h-100 ps-md-5 pe-md-5 ps-sm-1 pe-sm-1">
                             <div className="d-flex align-items-center">
-                                <div className="">
-                                    <Link to={`/detail?titleNo=`} className="text-white previous-icon">
-                                        <FontAwesomeIcon icon={faLongArrowLeft} />
-                                    </Link>
-                                </div>
-                                <div className="ms-5">
-                                    <Link to={'/'}>
-                                        <svg width="21" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.5734 1.33953C14.7595 -0.209304 16.911 -0.450273 18.3789 0.801309C19.8467 2.05289 20.0751 4.32307 18.8889 5.87191L6.07487 22.6041C5.1647 23.7926 3.6434 24.2467 2.2781 23.7373C0.912793 23.228 0 21.8659 0 20.3379V3.60572C0 1.6144 1.52988 0.000121701 3.41709 0.000121622C5.30429 0.000121542 6.83417 1.6144 6.83417 3.60572V10.1394L13.5734 1.33953ZM16.4213 24.0001C14.2097 24.0001 12.3335 22.2955 12.3335 19.7173C12.3335 17.1391 16.4213 12.7326 16.4213 12.7326C16.4213 12.7326 20.3423 17.1911 20.3423 19.7173C20.3423 22.2434 18.6329 24.0001 16.4213 24.0001Z" fill="#FFCC00">
-                                            </path>
-                                        </svg>
+                                <div className="me-lg-5 me-3 me-sm-4">
+                                    <Link to={'/'} className="redirect-home-btn">
+                                        <FontAwesomeIcon icon={faHome} />
                                     </Link>
                                 </div>
                             </div>
                             <div className="h-100  position-relative background-black d-flex align-items-center text-white">
-                                <div className="ps-4 pe-4">
-                                    <Tippy content="Previous episode">
-                                    <Link to={''} className="change-episode-btn">
+                                <div className="ps-2 pe-3 ps-sm-4 pe-sm-4">
+                                    <Link
+                                        to={'/reader?titleNo=' + titleNo + '&episodeNo=' + (currentEpisode - 1)}
+                                        className={`change-episode-btn ` + ((currentEpisode === firstEpisode) ? `disable-link` : ``)}
+                                    >
                                         <FontAwesomeIcon icon={faAngleLeft} />
                                     </Link>
-                                    </Tippy>
                                 </div>
                                 <div className="d-flex flex-column align-items-center tippy-episode-list">
-                                    <h6>
+                                    <h6 className='d-none d-sm-block'>
                                         <Link to={`/detail?titleNo=`} className="text-white title-hover">
                                             After School Lessons for Unripe Apples
                                         </Link>
@@ -72,45 +191,44 @@ function Reader() {
                                         interactive={true}
                                         render={attrs => (
                                             <div ref={episodeRef} className="box-list-episode" tabIndex="-1" {...attrs}>
-                                                <Link to={'/'} className="episode-link episode-link--active">
-                                                    <div className="episode-link-inner">
-                                                        <span>Episode 1</span>
-                                                    </div>
-                                                </Link>
-                                                <Link to={''} className="episode-link">
-                                                    <div className="episode-link-inner">
-                                                        <span>Episode 2</span>
-                                                    </div>
-                                                </Link>
-                                                <Link to={''} className="episode-link">
-                                                    <div className="episode-link-inner">
-                                                        <span>Episode 3</span>
-                                                    </div>
-                                                </Link>
-                                                <Link to={''} className="episode-link">
-                                                    <div className="episode-link-inner">
-                                                        <span>Episode 4</span>
-                                                    </div>
-                                                </Link>
+                                                {
+                                                    episodes.map((item) => (
+                                                        <Link
+                                                            key={item.episodeNo}
+                                                            to={'/reader?titleNo=' + titleNo + '&episodeNo=' + item.episodeNo}
+                                                            className={`episode-link` + ((currentEpisode === item.episodeNo) ? ` episode-link--active` : ``)}
+                                                        >
+                                                            <div className="episode-link-inner">
+                                                                <span>{item.episodeTitle}</span>
+                                                            </div>
+                                                        </Link>
+                                                    ))
+                                                }
                                             </div>
                                         )}>
                                         <button
                                             onClick={handleShowEpisodeList}
                                             className="list-episode-btn border-0 bg-transparent text-gray font-weight-bolder">
-                                            Episode 1 <FontAwesomeIcon icon={faAngleDown} />
+                                            {titleCurrentEpisode + ` `}
+                                            <FontAwesomeIcon icon={faAngleDown} />
                                         </button>
                                     </Tippy>
                                 </div>
-                                <div className="ps-4 pe-4">
-                                    {/* <Tippy content="Next episode"> */}
-                                    <Link to={''} className="change-episode-btn">
+                                <div className="ps-3 pe-2 ps-sm-4 pe-sm-4">
+                                    <Link
+                                        to={'/reader?titleNo=' + titleNo + '&episodeNo=' + (currentEpisode + 1)}
+                                        className={`change-episode-btn ` + ((currentEpisode === lastEpisode) ? `disable-link` : ``)}
+                                    >
                                         <FontAwesomeIcon icon={faAngleRight} />
                                     </Link>
-                                    {/* </Tippy> */}
                                 </div>
                             </div>
                             <div className="">
-                                end
+                                <div className="ms-lg-5 ms-3 ms-sm-4">
+                                    <Link to={`/detail?titleNo=` + titleNo} className="text-white previous-icon">
+                                        <FontAwesomeIcon icon={faListUl} />
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -118,21 +236,49 @@ function Reader() {
                 <div className='row'>
                     <div className='spacing-header'>
                         <div className='col-md-8 col-lg-6 ms-auto me-auto'>
-                            <img className="w-100" src="https://webtoon-phinf.pstatic.net/20220620_196/1655659216185X9ibj_JPEG/16556592161772964333.jpg?type=q90" alt="" />
-                            <img className="w-100" src="https://webtoon-phinf.pstatic.net/20220620_63/1655659214829Q7aq6_JPEG/16556592148132964331.jpg?type=q90" alt="" />
-                            <img className="w-100" src="https://webtoon-phinf.pstatic.net/20220620_261/1655659216872Hzcl3_JPEG/16556592168622964333.jpg?type=q90" alt="" />
-                            <img className="w-100" src="https://webtoon-phinf.pstatic.net/20220620_287/1655659214467XSpVG_JPEG/16556592144572964334.jpg?type=q90" alt="" />
-                            <img className="w-100" src="https://webtoon-phinf.pstatic.net/20220620_164/1655659213273xw5rw_JPEG/16556592132652964332.jpg?type=q90" alt="" />
-                            <img className="w-100" src="https://webtoon-phinf.pstatic.net/20220620_59/1655659214415RxxRc_JPEG/16556592144072964333.jpg?type=q90" alt="" />
-                            <img className="w-100" src="https://webtoon-phinf.pstatic.net/20220620_73/1655659216477agR7x_JPEG/16556592164642964335.jpg?type=q90" alt="" />
-                            <img className="w-100" src="https://webtoon-phinf.pstatic.net/20220620_131/1655659217362KKeD7_JPEG/16556592173532964336.jpg?type=q90" alt="" />
-                            <img className="w-100" src="https://webtoon-phinf.pstatic.net/20220620_295/1655659217218B6orL_JPEG/16556592172092964331.jpg?type=q90" alt="" />
-                            <img className="w-100" src="https://webtoon-phinf.pstatic.net/20220620_265/1655659219532VU0Uz_JPEG/16556592195232964338.jpg?type=q90" alt="" />
-                            <img className="w-100" src="https://webtoon-phinf.pstatic.net/20220620_260/1655659218846e0Bxn_JPEG/16556592188312964335.jpg?type=q90" alt="" />
-                            <img className="w-100" src="https://webtoon-phinf.pstatic.net/20220620_265/1655659222459k8x7o_JPEG/16556592224472964330.jpg?type=q90" alt="" />
-
+                            {
+                                (listImages.length === 1) ? (
+                                    <div className="d-flex align-items-center justify-content-center pb-5 pt-5">
+                                        <FontAwesomeIcon icon={faSpinner} className="loading-icon mt-5" />
+                                    </div>
+                                ) :
+                                    (
+                                        listImages.map(i => (
+                                            <img className="w-100" key={i.sortOrder} src={'https://webtoon-phinf.pstatic.net' + i.url} alt="" />
+                                        ))
+                                    )
+                            }
                         </div>
                     </div>
+                </div>
+                <div className='row'>
+                    <div className='change-episode-footer'>
+                        <Link
+                            to={'/reader?titleNo=' + titleNo + '&episodeNo=' + (currentEpisode - 1)}
+                            className={`change-episode-footer-btn ` + ((currentEpisode === firstEpisode) ? `disable-link` : ``)}
+                        >
+                            <FontAwesomeIcon icon={faAngleLeft} /> Chap trước
+                        </Link>
+                        <Link
+                            to={'/reader?titleNo=' + titleNo + '&episodeNo=' + (currentEpisode + 1)}
+                            className={`change-episode-footer-btn ` + ((currentEpisode === lastEpisode) ? `disable-link` : ``)}
+
+                        >
+                            Chap sau <FontAwesomeIcon icon={faAngleRight} />
+                        </Link>
+
+                    </div>
+                </div>
+
+                <div className='row'>
+                    <Footer />
+                </div>
+
+                <div className='position-fixed scroll-top-element'>
+                    <button className={`scroll-top-element-btn ` + ((visibleTopBtn) ? `d-block` : `d-none`)}
+                        onClick={scrollToTop}>
+                        <FontAwesomeIcon icon={faArrowUp} />
+                    </button>
                 </div>
             </div>
         </>

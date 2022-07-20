@@ -2,7 +2,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Detail.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faCompactDisc, faSortAlphaDesc, faSortAlphaDown, faSortAlphaUp } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faSortAlphaDown, faSortAlphaUp, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { faCommentDots, faEye, faThumbsUp, faUser } from '@fortawesome/free-regular-svg-icons';
 
 import Comment from './Comment/index.js';
@@ -10,9 +10,33 @@ import Description from './Description/index.js'
 
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import data from '~/data/data.json';
 
 
-import data from '~/data/data.json'
+
+const options = {
+    method: 'GET',
+    headers: {
+        'X-RapidAPI-Key': '626395e262msh02ba9742602b4e1p1d8a23jsnc6576cb24819',
+        'X-RapidAPI-Host': 'webtoon.p.rapidapi.com'
+    }
+};
+
+const setEpisodeUrl = (titleNo) => {
+    // return 'https://webtoon.p.rapidapi.com/originals/episodes/list?titleNo=' + titleNo + '&language=en'
+}
+
+
+function getDataAPI(url) {
+    return fetch(url, options)
+        .then((response) => response.json())
+        .then(res => {
+            return res;
+        })
+        .catch(error => {
+        });
+}
 
 
 function Detail() {
@@ -20,395 +44,39 @@ function Detail() {
     const [showModal, setShowModal] = useState(false);
     const [listComics] = useState(() => { return [...data]; });
     const [searchParams] = useSearchParams();
+    const [titleNo] = useState(() => {
+        return searchParams.get('titleNo');
+    });
     const [episodes, setEpisodes] = useState(
-        [
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1657846871000,
-                "episodeNo": 107,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1657846871000,
-                "readCount": 64385,
-                "episodeTitle": "(S2) Episode 50",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 107,
-                "thumbnailImageUrl": "/20220609_167/16547143908824EtFM_PNG/thumb_165471436252121131075.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 11718,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1657242067000,
-                "episodeNo": 106,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1657242067000,
-                "readCount": 84061,
-                "episodeTitle": "(S2) Episode 49",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 106,
-                "thumbnailImageUrl": "/20220519_33/1652946984552ivr3z_PNG/thumb_165294666877721131066.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 13944,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1656637265000,
-                "episodeNo": 105,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1656637265000,
-                "readCount": 90136,
-                "episodeTitle": "(S2) Episode 48",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 105,
-                "thumbnailImageUrl": "/20220519_204/1652946630199VWBkT_PNG/thumb_165294644243621131058.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 14690,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1656032464000,
-                "episodeNo": 104,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1656032464000,
-                "readCount": 95160,
-                "episodeTitle": "(S2) Episode 47",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 104,
-                "thumbnailImageUrl": "/20220519_127/1652946426823h2eIl_PNG/thumb_165294637167221131047.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 15040,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1655427670000,
-                "episodeNo": 103,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1655427670000,
-                "readCount": 99333,
-                "episodeTitle": "(S2) Episode 46",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 103,
-                "thumbnailImageUrl": "/20220428_120/1651131323381PYwAN_PNG/thumb_165113120691921131033.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 16497,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1654822867000,
-                "episodeNo": 102,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1654822867000,
-                "readCount": 101992,
-                "episodeTitle": "(S2) Episode 45",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 102,
-                "thumbnailImageUrl": "/20220428_216/1651131195339tJYru_PNG/thumb_165113099032921131025.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 16343,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1654218068000,
-                "episodeNo": 101,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1654218068000,
-                "readCount": 105868,
-                "episodeTitle": "(S2) Episode 44",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 101,
-                "thumbnailImageUrl": "/20220428_294/1651130975201TlFV0_PNG/thumb_165113088058021131019.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 16333,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1653613267000,
-                "episodeNo": 100,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1653613267000,
-                "readCount": 110187,
-                "episodeTitle": "(S2) Episode 43",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 100,
-                "thumbnailImageUrl": "/20220407_266/1649326951771v4ucC_PNG/thumb_164932690484821131003.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 16939,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1653008474000,
-                "episodeNo": 99,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1653008474000,
-                "readCount": 113341,
-                "episodeTitle": "(S2) Episode 42",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 99,
-                "thumbnailImageUrl": "/20220407_132/1649326882992Mc6FJ_PNG/thumb_16493264424622113997.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 18161,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1652403672000,
-                "episodeNo": 98,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1652403672000,
-                "readCount": 115853,
-                "episodeTitle": "(S2) Episode 41",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 98,
-                "thumbnailImageUrl": "/20220407_72/1649326399032TY4S8_PNG/thumb_16493261371572113981.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 17706,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1651798870000,
-                "episodeNo": 97,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1651798870000,
-                "readCount": 116338,
-                "episodeTitle": "(S2) Episode 40",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 97,
-                "thumbnailImageUrl": "/20220331_275/1648718611155sLvuG_PNG/thumb_16487182281652113978.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 18809,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1651194070000,
-                "episodeNo": 96,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1651194070000,
-                "readCount": 118839,
-                "episodeTitle": "(S2) Episode 39",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 96,
-                "thumbnailImageUrl": "/20220317_107/1647504822725gk5fh_PNG/thumb_16475042977462113964.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 18675,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1650589272000,
-                "episodeNo": 95,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1650589272000,
-                "readCount": 122168,
-                "episodeTitle": "(S2) Episode 38",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 95,
-                "thumbnailImageUrl": "/20220317_162/16475042636883g5IW_PNG/thumb_16475038749702113954.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 18946,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1649984472000,
-                "episodeNo": 94,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1649984472000,
-                "readCount": 123749,
-                "episodeTitle": "(S2) Episode 37",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 94,
-                "thumbnailImageUrl": "/20220303_17/1646295220213aurVe_PNG/thumb_16462951743712113949.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 19982,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1649379673000,
-                "episodeNo": 93,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1649379673000,
-                "readCount": 124242,
-                "episodeTitle": "(S2) Episode 36",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 93,
-                "thumbnailImageUrl": "/20220303_145/1646295138240HIpkd_PNG/thumb_16462946143842113936.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 19813,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1648774872000,
-                "episodeNo": 92,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1648774872000,
-                "readCount": 128978,
-                "episodeTitle": "(S2) Episode 35",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 92,
-                "thumbnailImageUrl": "/20220224_140/1645660891597UtRIH_PNG/thumb_16456608789862113928.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 19898,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1648170072000,
-                "episodeNo": 91,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1648170072000,
-                "readCount": 131286,
-                "episodeTitle": "(S2) Episode 34",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 91,
-                "thumbnailImageUrl": "/20220217_270/1645091655433yv5tM_JPEG/16450916554192113915.jpg?type=q70",
-                "bgmYn": "N",
-                "likeCount": 20537,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1647565271000,
-                "episodeNo": 90,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1647565271000,
-                "readCount": 135725,
-                "episodeTitle": "(S2) Episode 33",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 90,
-                "thumbnailImageUrl": "/20220210_102/1644453345403Dj5Jg_PNG/thumb_16444532789812113902.png?type=q70",
-                "bgmYn": "N",
-                "likeCount": 20876,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1646964066000,
-                "episodeNo": 89,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1646964066000,
-                "readCount": 141495,
-                "episodeTitle": "(S2) Episode 32",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 89,
-                "thumbnailImageUrl": "/20220126_90/1643193783769FtlfV_JPEG/16431937837632113892.jpg?type=q70",
-                "bgmYn": "N",
-                "likeCount": 21032,
-                "creatorNote": "",
-                "likeit": false
-            },
-            {
-                "dailyPassEpisode": false,
-                "rewardAdEpisode": false,
-                "passUseRestrictEpisode": false,
-                "registerYmdt": 1646359267000,
-                "episodeNo": 88,
-                "serviceStatus": "SERVICE",
-                "titleNo": 2113,
-                "exposureYmdt": 1646359267000,
-                "readCount": 141363,
-                "episodeTitle": "(S2) Episode 31",
-                "modifyYmdt": 1657846872000,
-                "episodeSeq": 88,
-                "thumbnailImageUrl": "/20220126_4/1643193696100UesSt_JPEG/16431936960872113887.jpg?type=q70",
-                "bgmYn": "N",
-                "likeCount": 23193,
-                "creatorNote": "",
-                "likeit": false
-            }
-        ]
+        [{
+            "episodeNo": 107,
+            "titleNo": 2113,
+            "episodeTitle": "(S2) Episode 50",
+            "thumbnailImageUrl": "/20220609_167/16547143908824EtFM_PNG/thumb_165471436252121131075.png?type=q70",
+        }]
+
     )
 
+
+    useEffect(() => {
+        getDataAPI(setEpisodeUrl(titleNo)).then(res => {
+            setEpisodes(res.message.result.episodeList.episode)
+        })
+    }, [])
+
+    const [firstEpisode, setFirstEpisode] = useState(0)
     const [isSortAscending, setIsSortAscending] = useState(true)
 
+
+    useEffect(() => {
+        const re = episodes.reduce(function (res, obj) {
+            return (obj.episodeNo < res.episodeNo) ? obj : res;
+        })
+        setFirstEpisode(re.episodeNo);
+    }, [episodes])
+
+
     const [comic] = useState(() => {
-        const titleNo = searchParams.get('titleNo');
         return listComics.find(obj => {
             return obj.titleNo === parseInt(titleNo)
         })
@@ -416,8 +84,7 @@ function Detail() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    },[])
-
+    }, [])
 
     const handleSortEpisode = () => {
         if (isSortAscending) {
@@ -475,9 +142,9 @@ function Detail() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button className="btn-start-read">
+                                                <Link to={'/reader?titleNo=' + comic.titleNo + '&episodeNo=' + firstEpisode} className="btn-start-read">
                                                     Đọc từ đầu
-                                                </button>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
@@ -505,12 +172,27 @@ function Detail() {
                                     <div className="">
 
                                         {
-                                            episodes.map(e => (
-                                                <div className="chapter-item" key={e.episodeNo}>
-                                                    <img className="rounded-3 me-3" src={'https://webtoon-phinf.pstatic.net' + e.thumbnailImageUrl} alt="" />
-                                                    <p className="chapter-item-title">{e.episodeTitle}</p>
-                                                </div>
-                                            ))
+                                            (episodes.length === 1)
+                                                ?
+                                                (
+                                                    <div className="d-flex align-items-center justify-content-center pb-4">
+                                                        <FontAwesomeIcon icon={faSpinner} className="loading-icon m-0" />
+                                                    </div>
+                                                )
+                                                :
+                                                (
+                                                    episodes.map(e => (
+                                                        <Link
+                                                            key={e.episodeNo}
+                                                            to={'/reader?titleNo=' + comic.titleNo + '&episodeNo=' + e.episodeNo}>
+
+                                                            <div className="chapter-item">
+                                                                <img className="rounded-3 me-3" src={'https://webtoon-phinf.pstatic.net' + e.thumbnailImageUrl} alt="" />
+                                                                <p className="chapter-item-title">{e.episodeTitle}</p>
+                                                            </div>
+                                                        </Link>
+                                                    ))
+                                                )
                                         }
 
                                     </div>
