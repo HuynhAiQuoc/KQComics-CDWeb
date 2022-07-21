@@ -1,0 +1,11 @@
+{
+    "header": {
+        "navbar": {
+            "home": "Trang chủ",
+            "browse": "Danh sách"
+        },
+        "login":{
+            "loginBtn": "Đăng nhập"
+        }
+    }
+}

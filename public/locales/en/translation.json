@@ -1,0 +1,11 @@
+{
+    "header": {
+        "navbar": {
+            "home": "Home",
+            "browse": "Browse"
+        },
+        "login":{
+            "loginBtn": "Login"
+        }
+    }
+}

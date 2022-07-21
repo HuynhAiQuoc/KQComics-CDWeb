@@ -45,8 +45,8 @@ html {
 
 
 @media (min-width: 992px) {
-    .w-85 {
-        width: 85%;
+    .w-80 {
+        width: 80%;
     }
 
     .spacing-header {

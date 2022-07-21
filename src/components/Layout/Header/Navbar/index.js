@@ -2,10 +2,14 @@
 
 import { NavLink } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
+
 import './Navbar.css';
 
 
 function Navbar() {
+
+    const { t } = useTranslation();
 
     return (
         <>
@@ -15,7 +19,7 @@ function Navbar() {
                         to="/"
                         className="nav-link"
                     >
-                        Trang chủ
+                        {t('header.navbar.home')}
                     </NavLink>
                 </li>
                 <li className="nav-item">
@@ -23,7 +27,7 @@ function Navbar() {
                         to="/browse"
                         className="nav-link"
                     >
-                        Danh sách
+                        {t('header.navbar.browse')}
                     </NavLink>
                     {/* <a className="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink"
                         role="button" data-bs-toggle="dropdown" aria-expanded="false">

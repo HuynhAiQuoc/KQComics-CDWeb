@@ -11,12 +11,17 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import genreLists from '~/data/genreLists.json'
 import data from '~/data/data.json'
-
 import { Link } from 'react-router-dom'
+
+import { useTranslation } from 'react-i18next';
+
 
 import { useState } from 'react';
 
 function Home() {
+
+    const { t } = useTranslation();
+
     const [genres] = useState([...genreLists]);
     const [banners] = useState(() => {
         const tem = data.sort((a, b) => { return b.favoriteCount - a.favoriteCount; });
