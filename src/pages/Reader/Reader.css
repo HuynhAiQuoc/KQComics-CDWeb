@@ -91,9 +91,9 @@
 
 .change-episode-footer {
     display: flex;
-    width: 280px;
+    width: 330px;
     margin: 32px auto;
-    justify-content: space-around;
+    justify-content: space-between;
 
 }
 
@@ -101,7 +101,7 @@
     display: flex;
     height: 36px;
     background-color: var(--red-color);
-    width: 110px;
+    width: 145px;
     padding: 0 5px;
     align-items: center;
     justify-content: space-around;

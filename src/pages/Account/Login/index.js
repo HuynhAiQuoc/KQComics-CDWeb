@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect, useRef } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 const users = [
     {
         id: 1,
@@ -19,6 +21,8 @@ const users = [
 ]
 
 function Login(props) {
+
+    const { t } = useTranslation();
 
     const [user, setUser] = useState({});
     const [password, setPassword] = useState('');
@@ -44,15 +48,15 @@ function Login(props) {
         if (user.password === password) {
             // login success
             props.handleCloseLogin();
-        }else{
-            setMessageErrorLogin('Mật khẩu không đúng');
+        } else {
+            setMessageErrorLogin(t('login.errorMessage'));
         }
     }
 
     return (
         <>
             <div className="w-100 ps-sm-4 pe-sm-4 d-flex flex-column align-items-center">
-                <p className="text-gray fw-bolder mt-4">Chào mừng trở lại</p>
+                <p className="text-gray fw-bolder mt-4">{t('login.greeting')}</p>
                 <div className="user-icon border border-color-white rounded-circle">
                     <FontAwesomeIcon icon={faUser} />
                 </div>
@@ -69,7 +73,7 @@ function Login(props) {
                         <input
                             type="password"
                             className="border-0 bg-transparent text-white"
-                            placeholder="Mật khẩu"
+                            placeholder={t('login.placeholderPassword')}
                             required
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -92,14 +96,14 @@ function Login(props) {
                                 className="checkbox-control-remember me-2"
                                 onChange={() => setRemember(!remember)}
                             />
-                            <label className="text-white" htmlFor="checkbox-control-remember">Ghi nhớ</label>
+                            <label className="text-white" htmlFor="checkbox-control-remember">{t('login.remember')}</label>
                         </div>
                         <button
                             type="submit"
                             className="bg-transparent btn-login rounded-4"
                             disabled={password === ""}
                         >
-                            Đăng nhập
+                            {t('login.loginBtn')}
                         </button>
                     </div>
                 </form>

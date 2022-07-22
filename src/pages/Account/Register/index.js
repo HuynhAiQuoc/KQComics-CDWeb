@@ -5,7 +5,13 @@ import { faEnvelope, faEye, faEyeSlash } from '@fortawesome/free-regular-svg-ico
 
 import { useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
+
 function Register(props) {
+
+    const { t } = useTranslation();
+
     const [username, setUsername] = useState({
         value: '',
         isValid: false,
@@ -29,7 +35,7 @@ function Register(props) {
         setUsername({
             value: username,
             isValid: username.length > 0,
-            errorMessage: username.length > 0 ? '' : 'Nhập tên đăng nhập'
+            errorMessage: username.length > 0 ? '' : t('register.message.username')
         });
     }
 
@@ -37,7 +43,7 @@ function Register(props) {
         setPassword({
             value: password,
             isValid: password.length >= 6,
-            errorMessage: password.length < 6 ? 'Mật khẩu phải có ít nhất 6 ký tự' : ''
+            errorMessage: password.length < 6 ? t('register.message.password') : ''
         });
     }
 
@@ -45,7 +51,7 @@ function Register(props) {
         setConfirmPassword({
             value: confirmPassword,
             isValid: confirmPassword === password.value,
-            errorMessage: confirmPassword !== password.value ? 'Mật khẩu không khớp' : ''
+            errorMessage: confirmPassword !== password.value ? t('register.message.confirmPassword') : ''
         });
     }
 
@@ -59,17 +65,16 @@ function Register(props) {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        console.log('submit form')
         if (username.isValid && password.isValid && confirmPassword.isValid) {
             // submit success
         } else {
             // submit fail
-            
+
         }
     }
     return (
         <>
-            <h5 className="text-white mb-3">Tạo tài khoản</h5>
+            <h5 className="text-white mb-3">{t('register.title')}</h5>
             <div className="ps-3 pe-3 w-100">
                 <form onSubmit={(e) => handleOnSubmit(e)}>
                     <div className="form-control form-control-signup d-flex rounded-4">
@@ -77,7 +82,7 @@ function Register(props) {
                         <input
                             type="text"
                             className="signup-input-control border-0 bg-transparent text-white"
-                            placeholder="Tên đăng nhập"
+                            placeholder={t('register.placeholder.username')}
                             spellCheck="false"
                             required
                             value={username.value}
@@ -105,7 +110,7 @@ function Register(props) {
                         <input
                             type={showPassword ? 'text' : 'password'}
                             className="signup-input-control border-0 bg-transparent text-white"
-                            placeholder="Mật khẩu"
+                            placeholder={t('register.placeholder.password')}
                             required
                             value={password.value}
                             onChange={(e) => handleOnchangePassword(e.target.value)}
@@ -134,7 +139,7 @@ function Register(props) {
                         <input
                             type={showConfirmPassword ? 'text' : 'password'}
                             className="signup-input-control border-0 bg-transparent text-white"
-                            placeholder="Nhập lại mật khẩu"
+                            placeholder={t('register.placeholder.confirmPassword')}
                             required
                             value={confirmPassword.value}
                             onChange={(e) => handleOnchangeConfirmPassword(e.target.value)}
@@ -162,7 +167,7 @@ function Register(props) {
                         type="submit"
                         className="signup-btn rounded-4 border-0"
                     >
-                        Đăng ký
+                        {t('register.registerBtn')}
                     </button>
                 </form>
             </div>

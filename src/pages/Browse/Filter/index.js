@@ -4,17 +4,31 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom'
 
 import genreLists from '~/data/genreLists.json'
+import { useTranslation } from 'react-i18next';
 
-const sortBys = ["Mặc định", "Tên A-Z", "Tên Z-A", "Lượt xem nhiều nhất", "Lượt xem ít nhất"];
 
 
 function Filter(props) {
+
+    const { t } = useTranslation();
+
+    const sortTypeF = () => {
+        return [t('browse.sort.default'), t('browse.sort.az'), t('browse.sort.za'), t('browse.sort.popularity'), t('browse.sort.unpopular')];
+    }
+
+    const [sortBys, setSortBys] = useState(sortTypeF);
 
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [filterTypeValue, setFilterTypeValue] = useState([]);
     const [displayFilterBtn, setDisplayFilterBtn] = useState(false);
     const [sort, setSort] = useState(sortBys[0]);
+
+    useEffect(() => {
+        setSortBys(sortTypeF);
+        setSort(sortBys[0])
+    }, [t])
+
 
     const handleChangeFilterType = (item) => {
         setFilterTypeValue(pre => {
@@ -65,7 +79,7 @@ function Filter(props) {
                     <div className="d-flex justify-content-between">
                         <div className="col-sm-6">
                             <h4 className="text-start mb-4">
-                                Filter
+                                {t('browse.filterTitle')}
                             </h4>
                         </div>
                         <div className="col-sm-6">
@@ -75,7 +89,7 @@ function Filter(props) {
                                     onClick={handleClearFilter}
                                     hidden={!displayFilterBtn}
                                 >
-                                    Clear Filter
+                                    {t('browse.clearFilter')}
                                 </button>
                             </div>
                         </div>
@@ -87,7 +101,7 @@ function Filter(props) {
                         <div className="filter-item">
                             <div className="filter-item-title">
                                 <p className="text-start">
-                                    Key Genres
+                                    {t('browse.genre')}
                                 </p>
                             </div>
                             <div className="filter-item-content">
@@ -128,7 +142,7 @@ function Filter(props) {
                     <div className="col-12">
                         <div className="filter-item-title">
                             <p className="text-start">
-                                Sort By
+                                {t('browse.sortTitle')}
                             </p>
                         </div>
                         <div className="sort text-white border border-color-white rounded-3 p-1 ps-3">

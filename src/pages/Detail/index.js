@@ -13,6 +13,7 @@ import { useSearchParams } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import data from '~/data/data.json';
 
+import { useTranslation } from 'react-i18next';
 
 
 const options = {
@@ -41,10 +42,12 @@ function getDataAPI(url) {
 
 function Detail() {
 
+    const { t } = useTranslation();
+
     const [showModal, setShowModal] = useState(false);
     const [listComics] = useState(() => { return [...data]; });
     const [searchParams] = useSearchParams();
-    const [titleNo] = useState(() => {
+    const [titleNo, setTitleNo] = useState(() => {
         return searchParams.get('titleNo');
     });
     const [episodes, setEpisodes] = useState(
@@ -57,6 +60,9 @@ function Detail() {
 
     )
 
+    useEffect(() => {
+        setTitleNo(searchParams.get('titleNo'));
+    }, [searchParams])
 
     useEffect(() => {
         getDataAPI(setEpisodeUrl(titleNo)).then(res => {
@@ -125,8 +131,8 @@ function Detail() {
                                                     <h3 className="story-title">
                                                         {comic.title}
                                                     </h3>
-                                                    <p className="story-author mt-2 mb-2 mt-lg-3 mb-lg-2">Tác giả:  {comic.titleAuthorList[0].authorName}</p>
-                                                    <p className="story-genres mt-2 mb-2">Thể loại:  {comic.representGenre}</p>
+                                                    <p className="story-author mt-2 mb-2 mt-lg-3 mb-lg-2">{t('detail.authorTitle')}:  {comic.titleAuthorList[0].authorName}</p>
+                                                    <p className="story-genres mt-2 mb-2">{t('detail.genre')}:  {comic.representGenre}</p>
                                                     <div className="d-flex mt-2 mt-lg-4">
                                                         <div className="me-4">
                                                             <FontAwesomeIcon className="me-1" icon={faEye} />
@@ -143,7 +149,7 @@ function Detail() {
                                                     </div>
                                                 </div>
                                                 <Link to={'/reader?titleNo=' + comic.titleNo + '&episodeNo=' + firstEpisode} className="btn-start-read">
-                                                    Đọc từ đầu
+                                                    {t('detail.startRead')}
                                                 </Link>
                                             </div>
                                         </div>
@@ -158,7 +164,7 @@ function Detail() {
                             <div className="ps-lg-2 pe-lg-2 mt-4 mb-4">
                                 <div className="background-header rounded-custom text-white">
                                     <div className="d-flex justify-content-between  p-3 p-lg-4">
-                                        <h5 className="list-chapter-title">Danh sách chương</h5>
+                                        <h5 className="list-chapter-title">{t('detail.episodesTitle')}</h5>
                                         <button className="btn-sort-chapter" onClick={handleSortEpisode}>
                                             {
                                                 isSortAscending ? (
@@ -211,7 +217,7 @@ function Detail() {
                                 <div className="ps-lg-3 pe-lg-3">
                                     <div className="background-header p-4 rounded-custom">
                                         <div className="story-description">
-                                            <h5>3 Comments</h5>
+                                            <h5>{t('detail.commentTitle')}</h5>
                                             <div className="mt-3">
                                                 <div className="comment-element d-flex">
                                                     <div className="me-2 pt-2">
@@ -237,7 +243,9 @@ function Detail() {
                                                                 <FontAwesomeIcon className="me-2 icon-comment" icon={faCommentDots} />
                                                                 <span className="text-gray">0</span>
                                                             </div>
-                                                            <button className="border-0 bg-transparent btn-reply">Reply</button>
+                                                            <button className="border-0 bg-transparent btn-reply">
+                                                                {t('detail.replyBtn')}
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -246,14 +254,15 @@ function Detail() {
                                                     <button
                                                         className="btn-show-all-comment"
                                                         onClick={() => setShowModal(true)}
-
                                                     >
-                                                        Xem tất cả bình luận
+                                                        {t('detail.showCommentBtn')}
                                                     </button><br />
                                                     <button
                                                         className="btn-add-comment mt-3"
                                                         onClick={() => setShowModal(true)}
-                                                    >Thêm bình luận</button>
+                                                    >
+                                                        {t('detail.addCommentBtn')}
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>

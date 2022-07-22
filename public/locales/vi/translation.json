@@ -2,10 +2,83 @@
     "header": {
         "navbar": {
             "home": "Trang chủ",
-            "browse": "Danh sách"
+            "browse": "Danh sách",
+            "history": "Lịch sử"
         },
         "login":{
             "loginBtn": "Đăng nhập"
+        },
+        "search":{
+            "placeholder": "Tìm kiếm truyện...",
+            "resultNone": "Không có kết quả nào phù hợp"
+        }
+    },
+    "home":{
+        "hotTitle": "TRUYỆN HOT",
+        "recommended": "TRUYỆN ĐỀ CỬ",
+        "explore": "KHÁM PHÁ"
+    },
+    "browse":{
+        "filterTitle": "Lọc truyện",
+        "genre": "Thể loại",
+        "clearFilter": "Xóa lọc",
+        "sortTitle": "Sắp xếp",
+        "showFilterBtn": "Lọc truyện",
+        "hiddenFilterBtn": "Ẩn lọc truyện",
+        "sort":{
+            "az": "Tên A-Z",
+            "za": "Tên Z-A",
+            "popularity": "Lượt xem nhiều nhất",
+            "unpopular": "Lượt xem ít nhất",
+            "default": "Mặc định"
+        }
+    },
+    "detail":{
+        "authorTitle": "Tác giả",
+        "genre": "Thể loại",
+        "startRead": "Đọc từ đầu",
+        "summary": "Nội dung",
+        "episodesTitle": "Danh sách chương",
+        "commentTitle": "Bình luận",
+        "addCommentBtn": "Thêm bình luận",
+        "showCommentBtn": "Xem tất cả bình luận",
+        "replyBtn": "Trả lời",
+        "placeholderComment": "Nhập bình luận của bạn"
+    },
+    "reader":{
+        "preEpisode": "Chương trước",
+        "nextEpisode": "Chương sau"
+    },
+
+    "enterEmail": {
+        "title": "Đăng nhập hoặc tạo tài khoản",
+        "placeholderEmail": "Nhập email của bạn",
+        "continueBtn": "Gửi",
+        "appleLogin": "Đăng nhập bằng Apple",
+        "googleLogin": "Đăng nhập bằng Google"
+    },
+
+    "login": {
+        "greeting": "Chào mừng trở lại",
+        "placeholderPassword": "Mật khẩu",
+        "remember": "Ghi nhớ",
+        "loginBtn": "Đăng nhập",
+        "forgotPassword": "Quên mật khẩu?",
+        "errorMessage": "Mật khẩu không đúng"
+    },
+
+    "register":{
+        "title": "Tạo tài khoản",
+        "placeholder": {
+            "username": "Tên đăng nhập",
+            "password": "Mật khẩu",
+            "confirmPassword": "Nhập lại mật khẩu"
+        },
+        "registerBtn": "Đăng ký",
+        "message":{
+            "username": "Nhập tên đăng nhập",
+            "password": "Mật khẩu phải có ít nhất 6 ký tự",
+            "confirmPassword": "Mật khẩu không khớp"
         }
     }
 }

@@ -12,8 +12,11 @@ import Login from './Login/index.js';
 import Register from './Register/index.js';
 import EnterEmail from './EnterEmail/index.js';
 
+import { useTranslation } from 'react-i18next';
 
 function Account(props) {
+
+    const { t } = useTranslation();
 
     const [mode, setMode] = useState('enter-email');
     const [email, setEmail] = useState('');
@@ -55,14 +58,14 @@ function Account(props) {
                     <div className="d-flex align-items-center flex-column">
                         {(mode === "enter-email") && <EnterEmail handleMode={handleMode} handleChangeEmail={handleChangeEmail} />}
                         {(mode === "login") && <Login handleCloseLogin={handleCloseLogin} email={email} />}
-                        {(mode === "register") && <Register email={email}/>}
+                        {(mode === "register") && <Register email={email} />}
                     </div>
                 </Modal.Body>
                 {
                     mode === "login" ?
                         (<Modal.Footer className="mb-0 border-0 p-0 modal-footer-custom">
                             <div className="border-bottom-line w-100 d-flex justify-content-center m-0">
-                                <button className="forget-password-btn">Quên mật khẩu?</button>
+                                <button className="forget-password-btn">{t('login.forgotPassword')}</button>
                             </div>
                         </Modal.Footer>) : null
                 }

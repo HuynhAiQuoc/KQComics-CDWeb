@@ -66,12 +66,7 @@ function Header() {
                             </div>
 
                             <div className="user-profile d-flex align-items-center">
-                                <button
-                                    className="me-lg-4 me-2 ms-3 change-language-btn bg-transparent"
-                                    onClick={handleChangeLanguage}
-                                >
-                                    <FontAwesomeIcon icon={faEarthAsia} /> {languageBtn}
-                                </button>
+
                                 <button
                                     className="short-search-btn border-0 bg-transparent text-white d-lg-none d-block"
                                     onClick={handleShowSearchField}
@@ -82,6 +77,13 @@ function Header() {
                                 <div className="separate-vertical-line d-lg-none d-block">
 
                                 </div>
+
+                                <button
+                                    className="me-lg-4 me-2 m2-3 change-language-btn bg-transparent"
+                                    onClick={handleChangeLanguage}
+                                >
+                                    <FontAwesomeIcon icon={faEarthAsia} /> {languageBtn}
+                                </button>
 
                                 <button
                                     onClick={() => setShowModal(true)}

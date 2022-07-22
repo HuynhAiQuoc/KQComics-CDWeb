@@ -5,17 +5,20 @@ import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css'; // optional
 
 import { Link } from 'react-router-dom';
-
 import data from '~/data/data.json'
 
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom'
 
+import { useTranslation } from 'react-i18next';
 
 import './SearchField.css';
 
 
 function SearchField() {
+
+    const { t } = useTranslation();
+
     const navigate = useNavigate();
     const inputSearch = useRef();
 
@@ -68,7 +71,9 @@ function SearchField() {
             <div className="search-size position-relative tippy-search">
                 <Tippy
                     visible={visibleSearchResult}
-                    interactive={true}
+                    interactive={false}
+                    allowHTML={true}
+                    hideOnClick	={false}
                     render={attrs => (
                         <div className="box-search-result" tabIndex="-1" {...attrs}>
                             <div className="search-result-content">
@@ -76,60 +81,60 @@ function SearchField() {
                                     (searchResult.length > 0) ?
                                         (
                                             searchResult.map(comic => (
-                                                <Link to={`/detail?titleNo=`+comic.titleNo}>
-                                                <div className="search-result-content-item" key={comic.titleNo}>
-                                                    <img src={'https://webtoon-phinf.pstatic.net' + comic.thumbnail}
-                                                        className="search-result-item--img rounded-2" alt="" />
-                                                    <p className="search-result-item--info">
-                                                        {comic.title}
-                                                    </p>
-                                                </div>
+                                                <Link to={`/detail?titleNo=` + comic.titleNo} key={comic.titleNo}>
+                                                    <div className="search-result-content-item" >
+                                                        <img src={'https://webtoon-phinf.pstatic.net' + comic.thumbnail}
+                                                            className="search-result-item--img rounded-2" alt="" />
+                                                        <p className="search-result-item--info">
+                                                            {comic.title}
+                                                        </p>
+                                                    </div>
                                                 </Link>
-                            ))
-                            ) :
+                                            ))
+                                        ) :
 
-                            (
-                            <div className="search-result-none">
-                                <div className="search-result-none-icon">
-                                    <FontAwesomeIcon icon={faBoxOpen} />
-                                </div>
-                                <div className="search-result-none-text">
-                                    Không có kết quả nào phù hợp
-                                </div>
-                            </div>
-                            )
+                                        (
+                                            <div className="search-result-none">
+                                                <div className="search-result-none-icon">
+                                                    <FontAwesomeIcon icon={faBoxOpen} />
+                                                </div>
+                                                <div className="search-result-none-text">
+                                                    {t('header.search.resultNone')}
+                                                </div>
+                                            </div>
+                                        )
                                 }
 
-                        </div>
+                            </div>
                         </div>
                     )}
 
                 >
-            <form onSubmit={handleSubmit}>
-                <div className="input-group-append d-flex align-items-center input-group border border-color-white border-radius">
-                    <input
-                        type="text"
-                        name="search"
-                        autoComplete="off"
-                        spellCheck="false"
-                        placeholder="Search titles, author, genres..."
-                        className="form-control bg-transparent border-0"
-                        onFocus={handleShowSearchResult}
-                        onBlur={handleHideSearchResult}
-                        onChange={handleSearch}
-                        value={textSearch}
-                        required={true}
-                        ref={inputSearch}
-                    />
+                    <form onSubmit={handleSubmit}>
+                        <div className="input-group-append d-flex align-items-center input-group border border-color-white border-radius">
+                            <input
+                                type="text"
+                                name="search"
+                                autoComplete="off"
+                                spellCheck="false"
+                                placeholder={t('header.search.placeholder')}
+                                className="form-control bg-transparent border-0"
+                                onFocus={handleShowSearchResult}
+                                onBlur={handleHideSearchResult}
+                                onChange={handleSearch}
+                                value={textSearch}
+                                required={true}
+                                ref={inputSearch}
+                            />
 
-                    <button
-                        className="d-lg-block d-none btn btn-outline-secondary border-0 border-start border-color-white"
-                        type="submit">
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </button>
-                </div>
-            </form>
-        </Tippy>
+                            <button
+                                className="d-lg-block d-none btn btn-outline-secondary border-0 border-start border-color-white"
+                                type="submit">
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            </button>
+                        </div>
+                    </form>
+                </Tippy>
 
             </div >
         </>

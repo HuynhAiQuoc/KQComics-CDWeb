@@ -80,7 +80,7 @@ function Home() {
                                         <div className="mt-2 mb-2">
                                             <div >
                                                 <div className="mt-4 pe-0 ps-0 mb-4 pb-1 border-bottom border-color-white">
-                                                    <h5 className="text-white mb-1">TRUYỆN HOT</h5>
+                                                    <h5 className="text-white mb-1">{t('home.hotTitle')}</h5>
                                                 </div>
                                                 <CarouselSlider >
                                                     {
@@ -92,7 +92,7 @@ function Home() {
                                             </div>
                                             <div >
                                                 <div className="mt-2 ps-0 mb-4 pb-1 border-bottom border-color-white">
-                                                    <h5 className="text-white mb-1">TRUYỆN ĐỀ CỬ</h5>
+                                                    <h5 className="text-white mb-1">{t('home.recommended')}</h5>
                                                 </div>
                                                 <div className="row">
                                                     {
@@ -112,7 +112,7 @@ function Home() {
                                         <div className="explore mt-4 ps-3 pe-2">
                                             <div className="row">
                                                 <h5 className="title text-white">
-                                                    KHÁM PHÁ
+                                                    {t('home.explore')}
                                                 </h5>
                                             </div>
                                             {

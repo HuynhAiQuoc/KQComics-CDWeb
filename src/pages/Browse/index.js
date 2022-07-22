@@ -11,8 +11,11 @@ import './Browse.css'
 
 import data from '~/data/data.json'
 
+import { useTranslation } from 'react-i18next';
 
 function Browse() {
+
+    const { t } = useTranslation();
 
     const comicsInPage = 60;
 
@@ -21,7 +24,8 @@ function Browse() {
     const [initialGenre, setInitialGenre] = useState('');
     const [listComics, setListComics] = useState(() => { return [...data]; });
     const [showFilter, setShowFilter] = useState(false);
-    const [textFilterBtn, setTextFilterBtn] = useState("Lọc truyện");
+
+    const [textFilterBtn, setTextFilterBtn] = useState(t('browse.showFilterBtn'));
     const [comics, setComics] = useState([]);
 
     // pagination state
@@ -38,7 +42,7 @@ function Browse() {
     const [filterType, setFilterType] = useState([]);
 
     // sort state
-    const [sort, setSort] = useState('Mặc định');
+    const [sort, setSort] = useState(t('browse.sort.default'));
 
 
     useEffect(() => {
@@ -65,6 +69,13 @@ function Browse() {
         window.scrollTo(0, 0);
     }, [currentPage, listComics, sort, filterType, totalPages]);
 
+    useEffect(() => {
+        if (showFilter) {
+            setTextFilterBtn(t('browse.hiddenFilterBtn'));
+        } else {
+            setTextFilterBtn(t('browse.showFilterBtn'));
+        }
+    }, [t])
 
     const getComicsPagination = (startIndex) => {
         let array = [];
@@ -81,17 +92,11 @@ function Browse() {
     const handleShowFilter = () => {
         setShowFilter(pre => {
             if (pre) {
+                setTextFilterBtn(t('browse.showFilterBtn'));
                 return false;
             } else {
+                setTextFilterBtn(t('browse.hiddenFilterBtn'));
                 return true;
-            }
-        });
-        setTextFilterBtn(pre => {
-            if (pre === "Lọc truyện") {
-                return "Ẩn lọc truyện";
-            }
-            else {
-                return "Lọc truyện";
             }
         });
     }
@@ -145,23 +150,23 @@ function Browse() {
 
     const sortComics = (typeSort) => {
         switch (typeSort) {
-            case 'Tên A-Z':
+            case t('browse.sort.az'):
                 setListComics(listComics.sort(sortAlphabet));
                 break;
-            case 'Tên Z-A':
+            case t('browse.sort.za'):
                 setListComics(listComics.sort(sortAlphabetRevers));
                 break;
-            case 'Lượt xem nhiều nhất':
+            case t('browse.sort.popularity'):
                 setListComics(listComics.sort((a, b) => {
                     return b.readCount - a.readCount;
                 }));
                 break;
-            case 'Lượt xem ít nhất':
+            case t('browse.sort.unpopular'):
                 setListComics(listComics.sort((a, b) => {
                     return a.readCount - b.readCount;
                 }));
                 break;
-            case 'Mặc định':
+            case t('browse.sort.default'):
                 setListComics(listComics);
                 break;
             default: break;
@@ -179,7 +184,7 @@ function Browse() {
                                     <button className="d-lg-none d-block btn btn-previous text-white me-2">
                                         <FontAwesomeIcon icon={faArrowLeft} />
                                     </button>
-                                    
+
                                     <div className="title">
                                         {/* <h4 className="text-white mb-1">Manga</h4> */}
                                     </div>

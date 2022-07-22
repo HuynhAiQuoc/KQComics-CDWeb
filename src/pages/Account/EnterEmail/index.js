@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faApple } from '@fortawesome/free-brands-svg-icons';
 
 
+import { useTranslation } from 'react-i18next';
+
 const users = [
     {
         id: 1,
@@ -21,6 +23,8 @@ const users = [
 
 
 function EnterEmail(props) {
+
+    const {t} = useTranslation();
 
     const [email, setEmail] = useState('');
     const [validEmail, setValidEmail] = useState(false);
@@ -54,14 +58,14 @@ function EnterEmail(props) {
     return (
         <>
             <img src="https://inkr.com/svg/account-prompt-info.svg" width="150" alt="" />
-            <p className="mt-2 text-white">Đăng nhập hoặc tạo tài khoản</p>
+            <p className="mt-2 text-white">{t('enterEmail.title')}</p>
 
             <form onSubmit={handleSubmitEnterPassword} className="w-100">
                 <div className="form-control form-control-login mt-3 p-0 rounded-4 w-100">
                     <input
                         type="email"
                         className="signin-input-control border-0 bg-transparent text-white"
-                        placeholder="Email"
+                        placeholder={t('enterEmail.placeholderEmail')}
                         spellCheck="false"
                         value={email}
                         onChange={(e) => handleChangeEmail(e)}
@@ -74,7 +78,7 @@ function EnterEmail(props) {
                         type="submit"
                         className={`btn-continue` + (validEmail ? ` btn-continue--active` : ``)}
                     >
-                        Continue
+                        {t('enterEmail.continueBtn')}
                     </button>
                 </div>
             </form>
@@ -84,11 +88,11 @@ function EnterEmail(props) {
 
             <button className="apple-btn border-0 rounded-4 d-flex align-items-center">
                 <FontAwesomeIcon icon={faApple} className="me-4 text-white" />
-                <p className="m-0 text-white">Đăng nhập bằng Apple  </p>
+                <p className="m-0 text-white">{t('enterEmail.appleLogin')}  </p>
             </button>
             <button className="google-btn border-0 mt-2 rounded-4 d-flex align-items-center">
                 <img className="me-3" src="https://inkr.com/svg/google-icon.svg" alt="" />
-                <p className="m-0">Đăng nhập bằng Google</p>
+                <p className="m-0">{t('enterEmail.googleLogin')}</p>
             </button>
         </>
     );

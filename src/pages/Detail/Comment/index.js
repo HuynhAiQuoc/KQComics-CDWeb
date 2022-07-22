@@ -3,8 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faCommentDots, faPaperPlane, faThumbsUp, faUser } from '@fortawesome/free-regular-svg-icons';
 
+import { useTranslation } from 'react-i18next';
+
 
 function Comment(props) {
+
+    const { t } = useTranslation();
 
     const handleCloseCommentDialog = () => {
         props.onClose();
@@ -19,7 +23,7 @@ function Comment(props) {
                 className="comment-container"
             >
                 <Modal.Header className="border-0 modal-comment-header">
-                    <p className="m-0 modal-comment-title">3 Comments</p>
+                    <p className="m-0 modal-comment-title">{t('detail.commentTitle')}</p>
                     <button
                         className="btn-close-modal-comment"
                         onClick={handleCloseCommentDialog}
@@ -52,7 +56,7 @@ function Comment(props) {
                                     <FontAwesomeIcon className="me-2 icon-comment" icon={faCommentDots} />
                                     <span className="text-gray">0</span>
                                 </div>
-                                <button className="border-0 bg-transparent btn-reply">Reply</button>
+                                <button className="border-0 bg-transparent btn-reply">{t('detail.replyBtn')}</button>
                             </div>
                         </div>
                     </div>
@@ -80,7 +84,7 @@ function Comment(props) {
                                     <FontAwesomeIcon className="me-2 icon-comment" icon={faCommentDots} />
                                     <span className="text-gray">0</span>
                                 </div>
-                                <button className="border-0 bg-transparent btn-reply">Reply</button>
+                                <button className="border-0 bg-transparent btn-reply">{t('detail.replyBtn')}</button>
                             </div>
                         </div>
                     </div>
@@ -108,7 +112,7 @@ function Comment(props) {
                                     <FontAwesomeIcon className="me-2 icon-comment" icon={faCommentDots} />
                                     <span className="text-gray">0</span>
                                 </div>
-                                <button className="border-0 bg-transparent btn-reply">Reply</button>
+                                <button className="border-0 bg-transparent btn-reply">{t('detail.replyBtn')}</button>
                             </div>
                         </div>
                     </div>
@@ -136,7 +140,7 @@ function Comment(props) {
                                     <FontAwesomeIcon className="me-2 icon-comment" icon={faCommentDots} />
                                     <span className="text-gray">0</span>
                                 </div>
-                                <button className="border-0 bg-transparent btn-reply">Reply</button>
+                                <button className="border-0 bg-transparent btn-reply">{t('detail.replyBtn')}</button>
                             </div>
                         </div>
                     </div>
@@ -144,7 +148,7 @@ function Comment(props) {
 
                 <Modal.Footer className="border-0 modal-comment-footer">
                     <div className="comment-field">
-                        <input type="text" className="comment-field-input" placeholder="Add your comment" />
+                        <input type="text" className="comment-field-input" placeholder={t('detail.placeholderComment')} />
                         <button type="button" className="comment-field-btn">
                             <FontAwesomeIcon icon={faPaperPlane} />
                         </button>

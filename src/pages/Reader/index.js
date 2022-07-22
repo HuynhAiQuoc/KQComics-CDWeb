@@ -13,6 +13,10 @@ import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom'
 import Footer from '~/components/Layout/Footer'
 
+
+import { useTranslation } from 'react-i18next';
+
+
 const options = {
     method: 'GET',
     headers: {
@@ -41,6 +45,8 @@ function getDataAPI(url) {
 
 
 function Reader() {
+
+    const { t } = useTranslation();
 
     const [searchParams] = useSearchParams();
     const [showEpisodeList, setShowEpisodeList] = useState(false);
@@ -257,14 +263,16 @@ function Reader() {
                             to={'/reader?titleNo=' + titleNo + '&episodeNo=' + (currentEpisode - 1)}
                             className={`change-episode-footer-btn ` + ((currentEpisode === firstEpisode) ? `disable-link` : ``)}
                         >
-                            <FontAwesomeIcon icon={faAngleLeft} /> Chap trước
+                            <FontAwesomeIcon icon={faAngleLeft} /> 
+                            {t('reader.preEpisode')}
                         </Link>
                         <Link
                             to={'/reader?titleNo=' + titleNo + '&episodeNo=' + (currentEpisode + 1)}
                             className={`change-episode-footer-btn ` + ((currentEpisode === lastEpisode) ? `disable-link` : ``)}
 
                         >
-                            Chap sau <FontAwesomeIcon icon={faAngleRight} />
+                            {t('reader.nextEpisode')}
+                             <FontAwesomeIcon icon={faAngleRight} />
                         </Link>
 
                     </div>
