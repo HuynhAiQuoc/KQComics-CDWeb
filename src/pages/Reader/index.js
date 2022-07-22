@@ -12,6 +12,7 @@ import 'tippy.js/dist/tippy.css'; // optional
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom'
 import Footer from '~/components/Layout/Footer'
+import data from '~/data/data.json';
 
 
 import { useTranslation } from 'react-i18next';
@@ -51,7 +52,7 @@ function Reader() {
     const [searchParams] = useSearchParams();
     const [showEpisodeList, setShowEpisodeList] = useState(false);
     const [visibleTopBtn, setVisibleTopBtn] = useState(false);
-
+    const [listComics] = useState(() => { return [...data]; });
     const [titleNo] = useState(() => { return searchParams.get('titleNo'); })
 
     const [currentEpisode, setCurrentEpisode] = useState(() => {
@@ -71,7 +72,13 @@ function Reader() {
 
     const [lastEpisode, setLastEpisode] = useState(0)
 
-    const [titleCurrentEpisode, setTitleCurrentEpisode] = useState(null)
+    const [titleCurrentEpisode, setTitleCurrentEpisode] = useState(null);
+
+    const [titleComic] = useState(() => {
+        return listComics.find(obj => {
+            return obj.titleNo === parseInt(titleNo)
+        }).title;
+    })
 
     const episodeRef = useRef();
 
@@ -189,7 +196,7 @@ function Reader() {
                                 <div className="d-flex flex-column align-items-center tippy-episode-list">
                                     <h6 className='d-none d-sm-block'>
                                         <Link to={`/detail?titleNo=`} className="text-white title-hover">
-                                            After School Lessons for Unripe Apples
+                                            {titleComic}
                                         </Link>
                                     </h6>
                                     <Tippy
@@ -263,7 +270,7 @@ function Reader() {
                             to={'/reader?titleNo=' + titleNo + '&episodeNo=' + (currentEpisode - 1)}
                             className={`change-episode-footer-btn ` + ((currentEpisode === firstEpisode) ? `disable-link` : ``)}
                         >
-                            <FontAwesomeIcon icon={faAngleLeft} /> 
+                            <FontAwesomeIcon icon={faAngleLeft} />
                             {t('reader.preEpisode')}
                         </Link>
                         <Link
@@ -272,7 +279,7 @@ function Reader() {
 
                         >
                             {t('reader.nextEpisode')}
-                             <FontAwesomeIcon icon={faAngleRight} />
+                            <FontAwesomeIcon icon={faAngleRight} />
                         </Link>
 
                     </div>
