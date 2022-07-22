@@ -2,8 +2,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Detail.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faSortAlphaDown, faSortAlphaUp, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { faCommentDots, faEye, faThumbsUp, faUser } from '@fortawesome/free-regular-svg-icons';
+import { faCommentDots, faArrowLeft, faSortAlphaDown, faSortAlphaUp, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faThumbsUp, faUser } from '@fortawesome/free-regular-svg-icons';
 
 import Comment from './Comment/index.js';
 import Description from './Description/index.js'
@@ -219,7 +219,7 @@ function Detail() {
                                         <div className="story-description">
                                             <h5>{t('detail.commentTitle')}</h5>
                                             <div className="mt-3">
-                                                <div className="comment-element d-flex">
+                                                {/* <div className="comment-element d-flex">
                                                     <div className="me-2 pt-2">
                                                         <div className="comment-user-icon">
                                                             <FontAwesomeIcon icon={faUser} />
@@ -228,7 +228,6 @@ function Detail() {
                                                     <div className="comment-block">
                                                         <div className="comment-header">
                                                             <span className="comment-author">Happy Bunny</span>
-                                                            {/* <span className="comment-position">Commented on Chapter 1 • </span> */}
                                                             <span className="comment-time">on Jun 4, 2022 at 06:21 AM</span>
                                                         </div>
                                                         <p className="comment-content">Deliberately scoring last and then talking down to the teacher is pretty obnoxious. I want to slap you. Stop writing garbage.</p>
@@ -248,15 +247,21 @@ function Detail() {
                                                             </button>
                                                         </div>
                                                     </div>
+                                                </div> */}
+                                                <div className="comment-element-null">
+                                                    <FontAwesomeIcon className="comment__element-null-icon" icon={faCommentDots} />
+                                                    <p className="mb-1">{t('detail.comment.descriptionFirst')}</p>
+                                                    <p>{t('detail.comment.descriptionSecond')}</p>
                                                 </div>
 
                                                 <div className="ms-4 ps-2 mt-3">
                                                     <button
-                                                        className="btn-show-all-comment"
+                                                        className="btn-show-all-comment d-none"
                                                         onClick={() => setShowModal(true)}
                                                     >
                                                         {t('detail.showCommentBtn')}
-                                                    </button><br />
+                                                    </button>
+                                                    <br />
                                                     <button
                                                         className="btn-add-comment mt-3"
                                                         onClick={() => setShowModal(true)}

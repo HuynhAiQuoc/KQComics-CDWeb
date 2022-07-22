@@ -5,7 +5,8 @@ import Browse from '~/pages/Browse/index.js';
 import Layout from '~/components/Layout/index.js';
 import SearchResult from '~/pages/SearchResult/index.js';
 import Detail from './pages/Detail/index.js';
-import Reader from './pages/Reader/index.js'
+import Reader from './pages/Reader/index.js';
+import History from './pages/History/index.js';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
           <Route path="/detail" element={<Layout><Detail /></Layout>} />
 
           <Route path="/reader" element={<Reader />} />
+
+          <Route path="/history" element={<Layout><History/></Layout>}/>
         </Routes>
       </div>
     </Router>

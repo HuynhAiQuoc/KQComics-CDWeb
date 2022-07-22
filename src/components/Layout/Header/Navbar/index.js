@@ -42,9 +42,12 @@ function Navbar() {
                     </ul> */}
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="/">
+                    <NavLink
+                        to="/history"
+                        className="nav-link"
+                    >
                         {t('header.navbar.history')}
-                    </a>
+                    </NavLink>
                 </li>
             </ul>
         </>

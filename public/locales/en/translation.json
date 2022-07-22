@@ -43,7 +43,11 @@
         "addCommentBtn": "Add Comment",
         "showCommentBtn": "Show all comments",
         "replyBtn": "Reply",
-        "placeholderComment": "Add your comment"
+        "placeholderComment": "Add your comment",
+        "comment": {
+            "descriptionFirst": "There is no comment.",
+            "descriptionSecond": "Add your comment and start a discussion on this title."
+        }
     },
     "reader": {
         "preEpisode": "Previous Episode",
@@ -80,5 +84,11 @@
             "password": "Password must be at least 6 characters",
             "confirmPassword": "Please make sure your passwords match"
         }
+    },
+    "search": {
+        "title": "Search results for "
+    },
+    "history": {
+        "deleteBtn": "Delete"
     }
 }

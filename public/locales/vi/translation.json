@@ -43,7 +43,11 @@
         "addCommentBtn": "Thêm bình luận",
         "showCommentBtn": "Xem tất cả bình luận",
         "replyBtn": "Trả lời",
-        "placeholderComment": "Nhập bình luận của bạn"
+        "placeholderComment": "Nhập bình luận của bạn",
+        "comment": {
+            "descriptionFirst": "Chưa có bình luận.",
+            "descriptionSecond": "Thêm bình luận của bạn và bắt đầu thảo luận về truyện này."
+        }
     },
     "reader":{
         "preEpisode": "Chương trước",
@@ -80,5 +84,12 @@
             "password": "Mật khẩu phải có ít nhất 6 ký tự",
             "confirmPassword": "Mật khẩu không khớp"
         }
+    },
+
+    "search": {
+        "title": "Kết quả tìm kiếm cho "
+    },
+    "history": {
+        "deleteBtn": "Xóa"
     }
 }

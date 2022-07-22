@@ -145,6 +145,7 @@
     border-radius: 8px;
     height: 32px;
     padding: 0 10px;
+ 
 }
 
 .list-chapter-title {
@@ -263,4 +264,13 @@
     padding: 0 15px;
     color: var(--gray-color-light);
     border-left: 1px solid var(--gray-color);;
+}
+
+.comment-element-null{
+    text-align: center;
+}
+
+.comment__element-null-icon{
+    font-size: 40px;
+    color: var(--gray-color);
 }

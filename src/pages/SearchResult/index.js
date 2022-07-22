@@ -9,8 +9,12 @@ import data from '~/data/data.json'
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom'
 
+import { useTranslation } from 'react-i18next';
 
 function SearchResult() {
+
+    const { t } = useTranslation();
+
     const [searchParams] = useSearchParams();
     const [textSearch, setTextSearch] = useState('');
 
@@ -80,7 +84,7 @@ function SearchResult() {
                 <div className="row">
                     <div className="border-bottom border-color-white p-0">
                         <div className="background-header search-title d-flex align-items-center ps-md-4 ps-2">
-                            <h4 className="text-white m-0">Kết quả tìm kiếm cho "{textSearch}"</h4>
+                            <h4 className="text-white m-0">{t('search.title')} "{textSearch}"</h4>
                         </div>
                     </div>
                 </div>
