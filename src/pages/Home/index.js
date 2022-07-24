@@ -122,7 +122,7 @@ function Home() {
                                                             <div className="mt-2 mb-2">
                                                                 <div className="background-header d-flex align-items-center pe-3 rounded-3 explore-color--hover">
                                                                     <img src={item.iconImage} alt="" style={{ width: '56px' }} />
-                                                                    <span className="text-white ms-3">{item.name}</span>
+                                                                    <span className="text-white ms-3 fw-500">{item.name}</span>
                                                                     <span className="text-white ms-auto">
                                                                         <FontAwesomeIcon icon={faAngleRight} />
                                                                     </span>

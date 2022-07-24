@@ -11,6 +11,9 @@
         "search":{
             "placeholder": "Tìm kiếm truyện...",
             "resultNone": "Không có kết quả nào phù hợp"
+        },
+        "setting": {
+            "languageLabel": "Ngôn ngữ"
         }
     },
     "home":{

@@ -68,7 +68,7 @@ function Detail() {
         getDataAPI(setEpisodeUrl(titleNo)).then(res => {
             setEpisodes(res.message.result.episodeList.episode)
         })
-    }, [])
+    }, [titleNo])
 
     const [firstEpisode, setFirstEpisode] = useState(0)
     const [isSortAscending, setIsSortAscending] = useState(true)
@@ -79,18 +79,28 @@ function Detail() {
             return (obj.episodeNo < res.episodeNo) ? obj : res;
         })
         setFirstEpisode(re.episodeNo);
-    }, [episodes])
+    }, [episodes]);
 
-
-    const [comic] = useState(() => {
+    const findComic = (tNo) =>{
         return listComics.find(obj => {
-            return obj.titleNo === parseInt(titleNo)
+            return obj.titleNo === parseInt(tNo)
         })
+    }
+   
+    const [comic, setComic] = useState(() => {
+       return findComic(titleNo);
     });
+
+    useEffect(() => {
+        setComic(findComic(titleNo));
+    },[titleNo])
+
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [])
+
+   
 
     const handleSortEpisode = () => {
         if (isSortAscending) {
@@ -127,7 +137,7 @@ function Detail() {
                                         <div className="d-flex">
                                             <img className="story-image" src={'https://webtoon-phinf.pstatic.net' + comic.thumbnail} alt="" />
                                             <div className="story-information ms-4 d-flex flex-column justify-content-between">
-                                                <div>
+                                                <div className="text-white">
                                                     <h3 className="story-title">
                                                         {comic.title}
                                                     </h3>

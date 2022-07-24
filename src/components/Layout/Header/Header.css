@@ -1,82 +1,81 @@
-
-
-
-.logo{
+.logo {
     width: 55px;
     height: 55px;
 }
 
-.navbar-nav-custom{
+.navbar-nav-custom {
     list-style: none;
 }
 
-.navbar-nav-custom,.nav-item, .nav-link{
+.navbar-nav-custom,
+.nav-item,
+.nav-link {
     height: 100%;
 }
 
-.nav-item{
+.nav-item {
     padding: 0 20px;
 }
 
-.nav-link{
+.nav-link {
     display: flex;
     align-items: center;
     padding: 0;
 }
 
-.nav-link:hover{
+.nav-link:hover {
     color: var(--yellow-color);
 }
 
-.dropdown-menu-custom{
+.dropdown-menu-custom {
     /* left: auto !important; */
     background-color: var(--background-color-black);
 }
 
-.dropdown-menu-custom .dropdown-item{
+.dropdown-menu-custom .dropdown-item {
     color: var(--white-color);
 }
 
-.dropdown-menu-custom .dropdown-item:hover{
+.dropdown-menu-custom .dropdown-item:hover {
     background-color: transparent !important;
     color: var(--yellow-color)
 }
 
-.border-radius{
+.border-radius {
     border-radius: 8px;
 }
 
-.search-size{
+.search-size {
     height: 32px;
     /* max-width: 590px; */
     width: 100%;
 }
 
-.form-control{
-    height:100%;
+.form-control {
+    height: 100%;
     color: var(--white-color) !important;
 }
 
-.input-group-append{
+.input-group-append {
     height: 100%;
 }
 
-.input-group-append .btn{
+.input-group-append .btn {
     height: 100%;
     padding: 0 9px;
     font-weight: 200;
 }
 
-.input-group-append .btn:hover{
+.input-group-append .btn:hover {
     background-color: transparent;
 }
- 
 
-.input-group-append:focus-within{
+
+.input-group-append:focus-within {
     border-color: var(--yellow-color) !important;
 }
 
-.signin-btn{
+.signin-btn {
     height: 32px;
     font-size: 14px;
     display: flex;
@@ -84,7 +83,7 @@
     min-width: 60px;
 }
 
-.separate-vertical-line{
+.separate-vertical-line {
     width: 1px;
     height: 30px;
     margin: 0 15px 0 8px;
@@ -92,14 +91,38 @@
 
 }
 
-.change-language-btn{
-    height: 32px;
+.change-language-btn {
+    height: 28px;
     border: 1px solid var(--yellow-color);
     color: var(--yellow-color);
-    width: 70px;
-    border-radius: 5px;
+    width: 56px;
+    border-radius: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 12px;
+    padding-right: 5px;
+}
+
+
+.setting-btn {
+    font-size: 20px;
+}
+
+.box-setting {
+    background-color: var(--background-header);
+    width: 200px;
+    right: 20px;
+    top: 35px;
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid var(--gray-color);
+    z-index: 2;
+}
+
+.position-header-fixed{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
 }

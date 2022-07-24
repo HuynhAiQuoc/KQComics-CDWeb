@@ -14,7 +14,7 @@ function Footer() {
 
     return (
         <>
-            <div id="footer" className="footer">
+            <div id="footer" className="footer border-color-white border-top">
                 <div className="footer-panel">
                     <div className="footer-panel-sub">
                         <div className="footer-panel-sub-division">

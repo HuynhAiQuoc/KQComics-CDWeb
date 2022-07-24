@@ -6,7 +6,7 @@ import { Modal } from 'react-bootstrap';
 import { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import Login from './Login/index.js';
 import Register from './Register/index.js';
@@ -52,7 +52,8 @@ function Account(props) {
                                 <FontAwesomeIcon icon={faArrowLeft} className="me-4 text-gray" />
                             </button>) : null
                     }
-                    <button onClick={handleCloseLogin} type="button" className="btn-close btn-close-white" aria-label="Close"></button>
+                    <button onClick={handleCloseLogin} type="button" className="btn-close btn-close-white text-white" aria-label="Close">
+                    </button>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="d-flex align-items-center flex-column">

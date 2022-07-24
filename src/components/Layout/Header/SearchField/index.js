@@ -17,10 +17,12 @@ import './SearchField.css';
 
 function SearchField() {
 
+
     const { t } = useTranslation();
 
     const navigate = useNavigate();
     const inputSearch = useRef();
+    const boxSearchRef = useRef();
 
     const [visibleSearchResult, setVisibleSearchResult] = useState(false);
     const [textSearch, setTextSearch] = useState('');
@@ -31,13 +33,22 @@ function SearchField() {
         setVisibleSearchResult(true);
     }
 
-    const handleHideSearchResult = () => {
-        setVisibleSearchResult(false);
-    }
-
     const handleSearch = (e) => {
         setTextSearch(e.target.value);
     }
+
+    useEffect(() => {
+        const handler = (event) => {
+            if (!boxSearchRef.current.contains(event.target)) {
+                setVisibleSearchResult(false);
+            }
+        }
+        document.addEventListener("mousedown", handler);
+        return () => {
+            document.removeEventListener("mousedown", handler);
+        }
+    }, []);
+
 
     useEffect(() => {
         let arr = [];
@@ -58,10 +69,12 @@ function SearchField() {
             setTextSearch('');
         }
     }, [visibleSearchResult])
+ 
 
     const handleSubmit = (e) => {
         e.preventDefault();
         inputSearch.current.blur();
+        setVisibleSearchResult(false);
         navigate('/search?text=' + textSearch);
     }
 
@@ -69,72 +82,66 @@ function SearchField() {
     return (
         <>
             <div className="search-size position-relative tippy-search">
-                <Tippy
-                    visible={visibleSearchResult}
-                    interactive={false}
-                    allowHTML={true}
-                    hideOnClick	={false}
-                    render={attrs => (
-                        <div className="box-search-result" tabIndex="-1" {...attrs}>
-                            <div className="search-result-content">
-                                {
-                                    (searchResult.length > 0) ?
-                                        (
-                                            searchResult.map(comic => (
-                                                <Link to={`/detail?titleNo=` + comic.titleNo} key={comic.titleNo}>
-                                                    <div className="search-result-content-item" >
-                                                        <img src={'https://webtoon-phinf.pstatic.net' + comic.thumbnail}
-                                                            className="search-result-item--img rounded-2" alt="" />
-                                                        <p className="search-result-item--info">
-                                                            {comic.title}
-                                                        </p>
-                                                    </div>
-                                                </Link>
-                                            ))
-                                        ) :
 
-                                        (
-                                            <div className="search-result-none">
-                                                <div className="search-result-none-icon">
-                                                    <FontAwesomeIcon icon={faBoxOpen} />
-                                                </div>
-                                                <div className="search-result-none-text">
-                                                    {t('header.search.resultNone')}
-                                                </div>
+                <form onSubmit={handleSubmit}>
+                    <div className="input-group-append d-flex align-items-center input-group border border-color-white border-radius">
+                        <input
+                            type="text"
+                            name="search"
+                            autoComplete="off"
+                            spellCheck="false"
+                            placeholder={t('header.search.placeholder')}
+                            className="form-control bg-transparent border-0"
+                            onFocus={handleShowSearchResult}
+                            onChange={handleSearch}
+                            value={textSearch}
+                            required={true}
+                            ref={inputSearch}
+                        />
+                        <button
+                            className="d-lg-block d-none btn btn-outline-secondary border-0 border-start border-color-white"
+                            type="submit">
+                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                        </button>
+                    </div>
+                </form>
+
+                <div ref={boxSearchRef} className={`box-search-result ` + (visibleSearchResult ? `d-block` : `d-none`)}>
+                    <div className="search-result-content">
+                        {
+                            (searchResult.length > 0) ?
+                                (
+                                    searchResult.map(comic => (
+                                        <Link to={`/detail?titleNo=` + comic.titleNo} key={comic.titleNo}>
+                                            <div className="search-result-content-item" >
+                                                <img src={'https://webtoon-phinf.pstatic.net' + comic.thumbnail}
+                                                    className="search-result-item--img rounded-2" alt="" />
+                                                <p className="search-result-item--info">
+                                                    {comic.title}
+                                                </p>
                                             </div>
-                                        )
-                                }
+                                        </Link>
+                                    ))
+                                ) :
 
-                            </div>
-                        </div>
-                    )}
+                                (
+                                    <div className="search-result-none">
+                                        <div className="search-result-none-icon">
+                                            <FontAwesomeIcon icon={faBoxOpen} />
+                                        </div>
+                                        <div className="search-result-none-text">
+                                            {t('header.search.resultNone')}
+                                        </div>
+                                    </div>
+                                )
+                        }
 
-                >
-                    <form onSubmit={handleSubmit}>
-                        <div className="input-group-append d-flex align-items-center input-group border border-color-white border-radius">
-                            <input
-                                type="text"
-                                name="search"
-                                autoComplete="off"
-                                spellCheck="false"
-                                placeholder={t('header.search.placeholder')}
-                                className="form-control bg-transparent border-0"
-                                onFocus={handleShowSearchResult}
-                                onBlur={handleHideSearchResult}
-                                onChange={handleSearch}
-                                value={textSearch}
-                                required={true}
-                                ref={inputSearch}
-                            />
+                    </div>
+                </div>
 
-                            <button
-                                className="d-lg-block d-none btn btn-outline-secondary border-0 border-start border-color-white"
-                                type="submit">
-                                <FontAwesomeIcon icon={faMagnifyingGlass} />
-                            </button>
-                        </div>
-                    </form>
-                </Tippy>
+
+
+
 
             </div >
         </>
