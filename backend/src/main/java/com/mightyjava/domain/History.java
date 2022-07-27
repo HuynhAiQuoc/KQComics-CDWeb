@@ -3,7 +3,7 @@ package com.mightyjava.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name="history")
+@Table(name = "history")
 public class History {
     @Id
     @GeneratedValue
@@ -18,13 +18,7 @@ public class History {
     @Column(nullable = false)
     private Long userId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userId", referencedColumnName = "id")
-    private User user;
-
-
-
-    public History(){
+    public History() {
 
     }
 
@@ -50,14 +44,6 @@ public class History {
 
     public void setEpisodeNo(Long episodeNo) {
         this.episodeNo = episodeNo;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Long getUserId() {

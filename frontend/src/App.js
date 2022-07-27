@@ -7,10 +7,16 @@ import SearchResult from '~/pages/SearchResult/index.js';
 import Detail from './pages/Detail/index.js';
 import Reader from './pages/Reader/index.js';
 import History from './pages/History/index.js';
+
+import CommentService from "./service/comment.service.js";
  
+import {useEffect} from 'react'
+
 function App() {
  
- 
+  useEffect(() => {
+    CommentService.add();
+  },[])
 
   return (
       <Router>

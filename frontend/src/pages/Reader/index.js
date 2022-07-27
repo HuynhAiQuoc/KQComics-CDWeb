@@ -16,34 +16,8 @@ import data from '~/data/data.json';
 
 
 import { useTranslation } from 'react-i18next';
-
-
-const options = {
-    method: 'GET',
-    headers: {
-        'X-RapidAPI-Key': '626395e262msh02ba9742602b4e1p1d8a23jsnc6576cb24819',
-        'X-RapidAPI-Host': 'webtoon.p.rapidapi.com'
-    }
-};
-
-const setEpisodeUrl = (titleNo) => {
-    // return 'https://webtoon.p.rapidapi.com/originals/episodes/list?titleNo=' + titleNo + '&language=en'
-}
-
-const setInforUrl = (titleNo, episodeNo) => {
-    // return 'https://webtoon.p.rapidapi.com/originals/episodes/get-info?titleNo=' + titleNo + '&episodeNo=' + episodeNo + '&language=en';
-}
-
-function getDataAPI(url) {
-    return fetch(url, options)
-        .then((response) => response.json())
-        .then(res => {
-            return res;
-        })
-        .catch(error => {
-        });
-}
-
+ 
+import ComicService from '~/service/comic.service'
 
 function Reader() {
 
@@ -104,15 +78,15 @@ function Reader() {
     }
 
     useEffect(() => {
-        getDataAPI(setEpisodeUrl(titleNo)).then(res => {
-            setEpisodes((res.message.result.episodeList.episode).sort((a, b) => b.episodeNo - a.episodeNo))
+        ComicService.getEpisodes(titleNo).then(res => {
+            setEpisodes((res).sort((a, b) => b.episodeNo - a.episodeNo))
         })
     }, [])
 
 
     useEffect(() => {
-        getDataAPI(setInforUrl(titleNo, currentEpisode)).then(res => {
-            setListImages((res.message.result.episodeInfo.imageInfo).sort((a, b) => a.sortOrder - b.sortOrder))
+        ComicService.getInformation(titleNo, currentEpisode).then(res => {
+            setListImages((res).sort((a, b) => a.sortOrder - b.sortOrder))
         })
     }, [titleNo, currentEpisode])
 

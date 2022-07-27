@@ -53,7 +53,8 @@
         "placeholderComment": "Add your comment",
         "comment": {
             "descriptionFirst": "There is no comment.",
-            "descriptionSecond": "Add your comment and start a discussion on this title."
+            "descriptionSecond": "Add your comment and start a discussion on this title.",
+            "loginRequired": "Please log in to comment"
         }
     },
     "reader": {

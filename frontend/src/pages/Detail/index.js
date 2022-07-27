@@ -14,31 +14,7 @@ import { Link } from 'react-router-dom';
 import data from '~/data/data.json';
 
 import { useTranslation } from 'react-i18next';
-
-
-const options = {
-    method: 'GET',
-    headers: {
-        'X-RapidAPI-Key': '626395e262msh02ba9742602b4e1p1d8a23jsnc6576cb24819',
-        'X-RapidAPI-Host': 'webtoon.p.rapidapi.com'
-    }
-};
-
-const setEpisodeUrl = (titleNo) => {
-    // return 'https://webtoon.p.rapidapi.com/originals/episodes/list?titleNo=' + titleNo + '&language=en'
-}
-
-
-function getDataAPI(url) {
-    return fetch(url, options)
-        .then((response) => response.json())
-        .then(res => {
-            return res;
-        })
-        .catch(error => {
-        });
-}
-
+import ComicService from '~/service/comic.service'
 
 function Detail() {
 
@@ -57,7 +33,6 @@ function Detail() {
             "episodeTitle": "(S2) Episode 50",
             "thumbnailImageUrl": "/20220609_167/16547143908824EtFM_PNG/thumb_165471436252121131075.png?type=q70",
         }]
-
     )
 
     useEffect(() => {
@@ -65,9 +40,9 @@ function Detail() {
     }, [searchParams])
 
     useEffect(() => {
-        getDataAPI(setEpisodeUrl(titleNo)).then(res => {
-            setEpisodes(res.message.result.episodeList.episode)
-        })
+        // ComicService.getEpisodes(titleNo).then(res => {
+        //     setEpisodes(res)
+        // })
     }, [titleNo])
 
     const [firstEpisode, setFirstEpisode] = useState(0)
@@ -81,26 +56,26 @@ function Detail() {
         setFirstEpisode(re.episodeNo);
     }, [episodes]);
 
-    const findComic = (tNo) =>{
+    const findComic = (tNo) => {
         return listComics.find(obj => {
             return obj.titleNo === parseInt(tNo)
         })
     }
-   
+
     const [comic, setComic] = useState(() => {
-       return findComic(titleNo);
+        return findComic(titleNo);
     });
 
     useEffect(() => {
         setComic(findComic(titleNo));
-    },[titleNo])
+    }, [titleNo])
 
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [])
 
-   
+
 
     const handleSortEpisode = () => {
         if (isSortAscending) {
@@ -285,13 +260,11 @@ function Detail() {
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
 
-            <Comment showModal={showModal} onClose={() => setShowModal(false)} />
+            <Comment titleNo={titleNo} showModal={showModal} onClose={() => setShowModal(false)} />
 
         </>
     );

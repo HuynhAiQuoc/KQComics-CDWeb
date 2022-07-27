@@ -53,7 +53,8 @@
         "placeholderComment": "Nhập bình luận của bạn",
         "comment": {
             "descriptionFirst": "Chưa có bình luận.",
-            "descriptionSecond": "Thêm bình luận của bạn và bắt đầu thảo luận về truyện này."
+            "descriptionSecond": "Thêm bình luận của bạn và bắt đầu thảo luận về truyện này.",
+            "loginRequired": "Vui lòng đăng nhập để bình luận"
         }
     },
     "reader":{
