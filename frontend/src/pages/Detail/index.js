@@ -14,7 +14,9 @@ import { Link } from 'react-router-dom';
 import data from '~/data/data.json';
 
 import { useTranslation } from 'react-i18next';
-import ComicService from '~/service/comic.service'
+import ComicService from '~/service/comic.service';
+import CommentService from '~/service/comment.service';
+
 
 function Detail() {
 
@@ -22,10 +24,13 @@ function Detail() {
 
     const [showModal, setShowModal] = useState(false);
     const [listComics] = useState(() => { return [...data]; });
+    const [listComments, setListComments] = useState([]);
+    const [lastComment, setLastComment] = useState();
     const [searchParams] = useSearchParams();
     const [titleNo, setTitleNo] = useState(() => {
         return searchParams.get('titleNo');
     });
+
     const [episodes, setEpisodes] = useState(
         [{
             "episodeNo": 107,
@@ -34,6 +39,18 @@ function Detail() {
             "thumbnailImageUrl": "/20220609_167/16547143908824EtFM_PNG/thumb_165471436252121131075.png?type=q70",
         }]
     )
+
+    useEffect(() => {
+        CommentService.getComments(Number(titleNo)).then(res => {
+            setListComments(res.data)
+        })
+    }, [titleNo]);
+
+    useEffect(() => {
+        if (listComments.length > 0) {
+            setLastComment(listComments[listComments.length - 1]);
+        }
+    }, [listComments])
 
     useEffect(() => {
         setTitleNo(searchParams.get('titleNo'));
@@ -204,44 +221,54 @@ function Detail() {
                                         <div className="story-description">
                                             <h5>{t('detail.commentTitle')}</h5>
                                             <div className="mt-3">
-                                                {/* <div className="comment-element d-flex">
-                                                    <div className="me-2 pt-2">
-                                                        <div className="comment-user-icon">
-                                                            <FontAwesomeIcon icon={faUser} />
-                                                        </div>
-                                                    </div>
-                                                    <div className="comment-block">
-                                                        <div className="comment-header">
-                                                            <span className="comment-author">Happy Bunny</span>
-                                                            <span className="comment-time">on Jun 4, 2022 at 06:21 AM</span>
-                                                        </div>
-                                                        <p className="comment-content">Deliberately scoring last and then talking down to the teacher is pretty obnoxious. I want to slap you. Stop writing garbage.</p>
-                                                        <div className="comment-footer d-flex">
-                                                            <div className="me-3">
-                                                                <button className="btn-favorite">
-                                                                    <FontAwesomeIcon icon={faThumbsUp} />
-                                                                </button>
-                                                                <span className="text-gray">4</span>
+                                                {
+                                                    (listComments.length > 0) ?
+                                                        (
+                                                            <div className="comment-element d-flex">
+                                                                <div className="me-2 pt-2">
+                                                                    <div className="comment-user-icon">
+                                                                        <FontAwesomeIcon icon={faUser} />
+                                                                    </div>
+                                                                </div>
+                                                                <div className="comment-block">
+                                                                    <div className="comment-header">
+                                                                        <span className="comment-author">{lastComment.username}</span>
+                                                                        <span className="comment-time">{lastComment.createAt}</span>
+                                                                    </div>
+                                                                    <p className="comment-content">{lastComment.content}</p>
+                                                                    <div className="comment-footer d-flex">
+                                                                        <div className="me-3">
+                                                                            <button className="btn-favorite">
+                                                                                <FontAwesomeIcon icon={faThumbsUp} />
+                                                                            </button>
+                                                                            <span className="text-gray">0</span>
+                                                                        </div>
+                                                                        <div className="me-3">
+                                                                            <FontAwesomeIcon className="me-2 icon-comment" icon={faCommentDots} />
+                                                                            <span className="text-gray">0</span>
+                                                                        </div>
+                                                                        <button className="border-0 bg-transparent btn-reply">
+                                                                            {t('detail.replyBtn')}
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div className="me-3">
-                                                                <FontAwesomeIcon className="me-2 icon-comment" icon={faCommentDots} />
-                                                                <span className="text-gray">0</span>
+                                                        )
+                                                        :
+                                                        (
+                                                            <div className="comment-element-null">
+                                                                <FontAwesomeIcon className="comment__element-null-icon" icon={faCommentDots} />
+                                                                <p className="mb-1">{t('detail.comment.descriptionFirst')}</p>
+                                                                <p>{t('detail.comment.descriptionSecond')}</p>
                                                             </div>
-                                                            <button className="border-0 bg-transparent btn-reply">
-                                                                {t('detail.replyBtn')}
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div> */}
-                                                <div className="comment-element-null">
-                                                    <FontAwesomeIcon className="comment__element-null-icon" icon={faCommentDots} />
-                                                    <p className="mb-1">{t('detail.comment.descriptionFirst')}</p>
-                                                    <p>{t('detail.comment.descriptionSecond')}</p>
-                                                </div>
+
+                                                        )
+                                                }
+
 
                                                 <div className="ms-4 ps-2 mt-3">
                                                     <button
-                                                        className="btn-show-all-comment d-none"
+                                                        className={`btn-show-all-comment ` +((listComments.length > 0)? `d-block`:`d-none`)}
                                                         onClick={() => setShowModal(true)}
                                                     >
                                                         {t('detail.showCommentBtn')}

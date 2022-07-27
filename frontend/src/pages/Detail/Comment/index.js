@@ -5,7 +5,7 @@ import { faCommentDots, faPaperPlane, faThumbsUp, faUser } from '@fortawesome/fr
 
 import { useTranslation } from 'react-i18next';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import CommentService from '~/service/comment.service';
 import AuthService from '~/service/auth.service';
@@ -19,6 +19,7 @@ function Comment(props) {
         props.onClose();
     }
 
+    const commentRef = useRef();
     const [listComments, setListComments] = useState([]);
     const [newComment, setNewComment] = useState([])
 
@@ -33,8 +34,11 @@ function Comment(props) {
         event.preventDefault();
         const user = AuthService.getCurrentUser();
         if (user) {
-            CommentService.add(newComment, user.id, props.titleNo).then(res => {
-                console.log(res)
+            CommentService.add(newComment, Number(user.id), Number(props.titleNo)).then(res => {
+                setListComments(pre => {
+                    return [...pre, res.data]
+                })
+                setNewComment('');
             })
         } else {
             alert(t('detail.comment.loginRequired'));
@@ -112,6 +116,7 @@ function Comment(props) {
                                 className="comment-field-input"
                                 placeholder={t('detail.placeholderComment')}
                                 value={newComment}
+                                ref={commentRef}
                                 onChange={(e) => setNewComment(e.target.value)}
                             />
                             <button
