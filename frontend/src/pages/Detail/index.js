@@ -17,6 +17,8 @@ import { useTranslation } from 'react-i18next';
 import ComicService from '~/service/comic.service';
 import CommentService from '~/service/comment.service';
 
+import FormatService from '~/service/format.service';
+
 
 function Detail() {
 
@@ -136,13 +138,13 @@ function Detail() {
                                                         <div className="me-4">
                                                             <FontAwesomeIcon className="me-1" icon={faEye} />
                                                             <span className="">
-                                                                {numFormatter(comic.readCount)}
+                                                                {FormatService.numFormatter(comic.readCount)}
                                                             </span>
                                                         </div>
                                                         <div className="">
                                                             <FontAwesomeIcon className="me-1" icon={faThumbsUp} />
                                                             <span className="">
-                                                                {numFormatter(comic.likeitCount)}
+                                                                {FormatService.numFormatter(comic.likeitCount)}
                                                             </span>
                                                         </div>
                                                     </div>
@@ -293,17 +295,6 @@ function Detail() {
         </>
     );
 
-    function numFormatter(num) {
-        if (num > 999 && num < 1000000) {
-            return (num / 1000).toFixed(1) + 'K'; // convert to K for number from > 1000 < 1 million 
-        } else if (num > 1000000 && num < 999999999) {
-            return (num / 1000000).toFixed(1) + 'M'; // convert to M for number from > 1 million 
-        } else if (num > 1000000000) {
-            return (num / 1000000000).toFixed(1) + 'B'
-        } else if (num < 900) {
-            return num; // if value < 1000, nothing to do
-        }
     }
-}
 
 export default Detail;

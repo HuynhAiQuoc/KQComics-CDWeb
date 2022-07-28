@@ -120,7 +120,7 @@ function Home() {
                                                     <div className="row" key={index}>
                                                         <Link to={`/browse?genre=` + item.code}>
                                                             <div className="mt-2 mb-2">
-                                                                <div className="background-header d-flex align-items-center pe-3 rounded-3 explore-color--hover">
+                                                                <div className="genres__card background-header d-flex align-items-center pe-3 rounded-3 explore-color--hover">
                                                                     <img src={item.iconImage} alt="" style={{ width: '56px' }} />
                                                                     <span className="text-white ms-3 fw-500">{item.name}</span>
                                                                     <span className="text-white ms-auto">

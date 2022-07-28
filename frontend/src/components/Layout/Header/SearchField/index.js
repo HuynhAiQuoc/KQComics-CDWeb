@@ -38,7 +38,7 @@ function SearchField() {
 
     useEffect(() => {
         const handler = (event) => {
-            if (!boxSearchRef.current.contains(event.target)) {
+            if ((!boxSearchRef.current.contains(event.target))&(!inputSearch.current.contains(event.target))) {
                 setVisibleSearchResult(false);
             }
         }
