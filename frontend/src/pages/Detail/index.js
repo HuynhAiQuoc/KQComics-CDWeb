@@ -25,20 +25,14 @@ function Detail() {
     const [showModal, setShowModal] = useState(false);
     const [listComics] = useState(() => { return [...data]; });
     const [listComments, setListComments] = useState([]);
-    const [lastComment, setLastComment] = useState();
+    const [lastComment, setLastComment] = useState({
+    });
     const [searchParams] = useSearchParams();
     const [titleNo, setTitleNo] = useState(() => {
         return searchParams.get('titleNo');
     });
 
-    const [episodes, setEpisodes] = useState(
-        [{
-            "episodeNo": 107,
-            "titleNo": 2113,
-            "episodeTitle": "(S2) Episode 50",
-            "thumbnailImageUrl": "/20220609_167/16547143908824EtFM_PNG/thumb_165471436252121131075.png?type=q70",
-        }]
-    )
+    const [episodes, setEpisodes] = useState([{}])
 
     useEffect(() => {
         CommentService.getComments(Number(titleNo)).then(res => {
@@ -93,6 +87,9 @@ function Detail() {
     }, [])
 
 
+    const handleSetComments = (comments) =>{
+        setListComments(comments)
+    }
 
     const handleSortEpisode = () => {
         if (isSortAscending) {
@@ -268,7 +265,7 @@ function Detail() {
 
                                                 <div className="ms-4 ps-2 mt-3">
                                                     <button
-                                                        className={`btn-show-all-comment ` +((listComments.length > 0)? `d-block`:`d-none`)}
+                                                        className={`btn-show-all-comment ` + ((listComments.length > 0) ? `d-block` : `d-none`)}
                                                         onClick={() => setShowModal(true)}
                                                     >
                                                         {t('detail.showCommentBtn')}
@@ -291,7 +288,7 @@ function Detail() {
                 </div>
             </div>
 
-            <Comment titleNo={titleNo} showModal={showModal} onClose={() => setShowModal(false)} />
+            <Comment handleSetComments={handleSetComments} titleNo={titleNo} showModal={showModal} onClose={() => setShowModal(false)} />
 
         </>
     );

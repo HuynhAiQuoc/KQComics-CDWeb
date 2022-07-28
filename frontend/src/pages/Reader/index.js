@@ -16,7 +16,7 @@ import data from '~/data/data.json';
 
 
 import { useTranslation } from 'react-i18next';
- 
+
 import ComicService from '~/service/comic.service'
 
 function Reader() {
@@ -33,14 +33,7 @@ function Reader() {
         return parseInt(searchParams.get('episodeNo'));
     });
 
-    const [episodes, setEpisodes] = useState(
-        [{
-            "episodeNo": 107,
-            "titleNo": 2113,
-            "episodeTitle": "(S2) Episode 50",
-            "thumbnailImageUrl": "/20220609_167/16547143908824EtFM_PNG/thumb_165471436252121131075.png?type=q70",
-        }]
-    );
+    const [episodes, setEpisodes] = useState([{}]);
 
     const [firstEpisode, setFirstEpisode] = useState(0)
 
@@ -56,15 +49,7 @@ function Reader() {
 
     const episodeRef = useRef();
 
-    const [listImages, setListImages] = useState(
-        [
-            {
-                "sortOrder": 1,
-                "cutId": 315,
-                "url": "/20210716_109/1626380107606NjqzR_JPEG/1626380103911309311.jpg?type=q70",
-            }
-        ]
-    )
+    const [listImages, setListImages] = useState([{}])
 
     const getTitleEpisode = () => {
         const ob = episodes.find(obj => {

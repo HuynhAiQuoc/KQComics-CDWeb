@@ -45,6 +45,10 @@ function Comment(props) {
         }
     }
 
+    useEffect(() => {
+        props.handleSetComments(listComments);
+    }, [listComments]);
+
     return (
         <>
             <Modal
@@ -97,8 +101,11 @@ function Comment(props) {
                                 ))
                             )
                             : (
-                                <>
-                                </>
+                                <div className="comment-element-null text-white">
+                                    <FontAwesomeIcon className="comment__element-null-icon" icon={faCommentDots} />
+                                    <p className="mb-1">{t('detail.comment.descriptionFirst')}</p>
+                                    <p>{t('detail.comment.descriptionSecond')}</p>
+                                </div>
                             )
                     }
 
