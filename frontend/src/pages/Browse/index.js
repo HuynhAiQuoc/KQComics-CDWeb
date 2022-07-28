@@ -178,12 +178,12 @@ function Browse() {
             <div className="col-md-12 col-lg-9">
                 <div className="ps-xl-5 pe-xl-5 spacing-header">
                     <div className="row">
-                        <div className="mt-4 mb-4">
+                        <div className="mt-3 mb-2">
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex justify-content-start align-items-center">
-                                    <button className="d-lg-none d-block btn btn-previous text-white me-2">
+                                    {/* <button className="d-lg-none d-block btn btn-previous text-white me-2">
                                         <FontAwesomeIcon icon={faArrowLeft} />
-                                    </button>
+                                    </button> */}
 
                                     <div className="title">
                                         {/* <h4 className="text-white mb-1">Manga</h4> */}

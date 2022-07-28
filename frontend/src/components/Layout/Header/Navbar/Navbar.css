@@ -8,6 +8,10 @@
     position: relative;
 }
 
+.nav-link:focus{
+    color: var(--yellow-color);
+}
+
  
 .active {
     color: var(--yellow-color);

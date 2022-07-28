@@ -96,7 +96,7 @@ public class UserResourceImpl {
         return null;
     }
 
-    @PostMapping(value = "check_user")
+    @PostMapping(value = "/check_user")
     public ResponseEntity<String> checkUser(@RequestBody Map<String, Object> emailObject) {
         JSONObject jsonObject = new JSONObject();
         try {
