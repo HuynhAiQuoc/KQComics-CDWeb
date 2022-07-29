@@ -2,7 +2,7 @@
 import './History.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react'
@@ -34,6 +34,7 @@ function History() {
         }
     }, [])
 
+
     useEffect(() => {
         const filterValue = historyComics.map((h) => { return h.titleNo });
         setListComics(data.filter(c => filterValue.includes(c.titleNo)))
@@ -41,9 +42,14 @@ function History() {
 
 
     const handleDelete = (e, titleNo) => {
-        e.preventDefault(); 
-        e.stopPropagation();
-        console.log(titleNo)
+        e.preventDefault();
+        const historyId = historyComics.filter(h => h.titleNo === titleNo)[0].id;
+        HistoryService.delete(historyId);
+        setListComics(listComics.filter(c => c.titleNo !== titleNo))
+    }
+
+    const getEpisodeContinue = (titleNo) => {
+        return historyComics.filter(h => h.titleNo === titleNo)[0].episodeNo;
     }
 
     return (
@@ -75,7 +81,7 @@ function History() {
                                                                 <button
                                                                     type="button"
                                                                     className="delete-comic-btn"
-                                                                    onClick={() => handleDelete(comic.titleNo)}
+                                                                    onClick={(e) => handleDelete(e, comic.titleNo)}
                                                                 >
                                                                     <FontAwesomeIcon icon={faTimes} /> {t('history.deleteBtn')}
                                                                 </button>
@@ -83,11 +89,13 @@ function History() {
                                                         </div>
                                                         <div className="card-body p-0 pt-2">
                                                             <h5 className="lead card-title text-center">
-                                                                {/* {props.comic.title} */}
                                                                 {comic.title}
                                                             </h5>
                                                         </div>
                                                     </div>
+                                                </Link>
+                                                <Link to={'/reader?titleNo=' + comic.titleNo + '&episodeNo=' + getEpisodeContinue(comic.titleNo)} className="continue__reading-btn">
+                                                    {t('history.continueBtn')} <FontAwesomeIcon icon={faAngleRight} />
                                                 </Link>
                                             </div>
 

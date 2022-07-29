@@ -17,7 +17,9 @@ import data from '~/data/data.json';
 
 import { useTranslation } from 'react-i18next';
 
-import ComicService from '~/service/comic.service'
+import ComicService from '~/service/comic.service';
+import AuthService from '~/service/auth.service';
+import HistoryService from '~/service/history.service'
 
 function Reader() {
 
@@ -34,11 +36,8 @@ function Reader() {
     });
 
     const [episodes, setEpisodes] = useState([{}]);
-
-    const [firstEpisode, setFirstEpisode] = useState(0)
-
-    const [lastEpisode, setLastEpisode] = useState(0)
-
+    const [firstEpisode, setFirstEpisode] = useState(1)
+    const [lastEpisode, setLastEpisode] = useState(1)
     const [titleCurrentEpisode, setTitleCurrentEpisode] = useState(null);
 
     const [titleComic] = useState(() => {
@@ -48,7 +47,6 @@ function Reader() {
     })
 
     const episodeRef = useRef();
-
     const [listImages, setListImages] = useState([{}])
 
     const getTitleEpisode = () => {
@@ -66,7 +64,7 @@ function Reader() {
         ComicService.getEpisodes(titleNo).then(res => {
             setEpisodes((res).sort((a, b) => b.episodeNo - a.episodeNo))
         })
-    }, [])
+    }, [titleNo])
 
 
     useEffect(() => {
@@ -107,6 +105,19 @@ function Reader() {
         setTitleCurrentEpisode(getTitleEpisode);
         setShowEpisodeList(false);
     }, [currentEpisode, episodes])
+
+
+    useEffect(() => {
+        const user = AuthService.getCurrentUser();
+        if (user) {
+            let timer1 = setTimeout(() =>
+                (HistoryService.add(Number(user.id), Number(titleNo), Number(currentEpisode)))
+                , 500);
+            return () => {
+                clearTimeout(timer1);
+            };
+        }
+    }, [currentEpisode])
 
 
     const scrollToTop = () => {

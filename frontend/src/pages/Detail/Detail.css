@@ -61,13 +61,29 @@
     border-radius: 8px;
     border: none;
     height: 32px;
-    max-width: 200px;
+    width: 105px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--black-color);
 }
 
+.btn__continue-reading{
+    background-color: var(--red-color);
+    border-radius: 8px;
+    border: none;
+    height: 32px;
+    width: 125px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white-color);
+    margin-left: 15px;
+}
+
+.btn-start-read:hover, .btn__continue-reading:hover{
+    opacity: .8;
+}
 
 
 .story-description {

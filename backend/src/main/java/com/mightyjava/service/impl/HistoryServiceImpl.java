@@ -17,11 +17,11 @@ public class HistoryServiceImpl implements IHistoryService {
     @Override
     public void addHistory(History history) {
         History oldHistory = historyRepository.checkExistHistory(history.getUserId(), history.getTitleNo());
-        if(oldHistory !=null){
+        if (oldHistory != null) {
             //update history
             oldHistory.setEpisodeNo(history.getEpisodeNo());
             historyRepository.save(oldHistory);
-        }else{
+        } else {
             // add history
             historyRepository.save(history);
         }

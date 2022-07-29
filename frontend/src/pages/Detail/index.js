@@ -16,6 +16,8 @@ import data from '~/data/data.json';
 import { useTranslation } from 'react-i18next';
 import ComicService from '~/service/comic.service';
 import CommentService from '~/service/comment.service';
+import HistoryService from '~/service/history.service';
+import AuthService from '~/service/auth.service';
 
 import FormatService from '~/service/format.service';
 
@@ -27,14 +29,27 @@ function Detail() {
     const [showModal, setShowModal] = useState(false);
     const [listComics] = useState(() => { return [...data]; });
     const [listComments, setListComments] = useState([]);
-    const [lastComment, setLastComment] = useState({
-    });
+    const [lastComment, setLastComment] = useState({});
     const [searchParams] = useSearchParams();
     const [titleNo, setTitleNo] = useState(() => {
         return searchParams.get('titleNo');
     });
 
-    const [episodes, setEpisodes] = useState([{}])
+    const [episodes, setEpisodes] = useState([{}]);
+    const [historyComic, setHistoryComic] = useState({});
+
+    useEffect(() => {
+        const user = AuthService.getCurrentUser();
+        if (user) {
+            HistoryService.getSingleHistory(Number(user.id), Number(titleNo)).then(res => {
+                if (res.data) {
+                    setHistoryComic(res.data)
+                }
+            })
+        } else {
+
+        }
+    }, [titleNo])
 
     useEffect(() => {
         CommentService.getComments(Number(titleNo)).then(res => {
@@ -53,12 +68,12 @@ function Detail() {
     }, [searchParams])
 
     useEffect(() => {
-        // ComicService.getEpisodes(titleNo).then(res => {
-        //     setEpisodes(res)
-        // })
+        ComicService.getEpisodes(titleNo).then(res => {
+            setEpisodes(res || [{}])
+        })
     }, [titleNo])
 
-    const [firstEpisode, setFirstEpisode] = useState(0)
+    const [firstEpisode, setFirstEpisode] = useState(1)
     const [isSortAscending, setIsSortAscending] = useState(true)
 
 
@@ -66,7 +81,7 @@ function Detail() {
         const re = episodes.reduce(function (res, obj) {
             return (obj.episodeNo < res.episodeNo) ? obj : res;
         })
-        setFirstEpisode(re.episodeNo);
+        setFirstEpisode(re.episodeNo || 1);
     }, [episodes]);
 
     const findComic = (tNo) => {
@@ -89,7 +104,7 @@ function Detail() {
     }, [])
 
 
-    const handleSetComments = (comments) =>{
+    const handleSetComments = (comments) => {
         setListComments(comments)
     }
 
@@ -113,9 +128,9 @@ function Detail() {
                                 <div className="background-header p-3 p-lg-4 rounded-custom">
                                     <div className="row">
                                         <div className="d-flex d-lg-none mb-3 justify-content-between">
-                                            <button className="btn-previous">
-                                                <FontAwesomeIcon icon={faArrowLeft} />
-                                            </button>
+                                            <div>
+
+                                            </div>
                                             <button
                                                 className="btn-open-comment"
                                                 onClick={() => setShowModal(true)}
@@ -149,10 +164,39 @@ function Detail() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <Link to={'/reader?titleNo=' + comic.titleNo + '&episodeNo=' + firstEpisode} className="btn-start-read">
-                                                    {t('detail.startRead')}
-                                                </Link>
+                                                <div className="d-none d-sm-flex">
+                                                    <Link
+                                                        to={'/reader?titleNo=' + comic.titleNo + '&episodeNo=' + firstEpisode}
+                                                        className="btn-start-read"
+                                                    >
+                                                        {t('detail.startRead')}
+                                                    </Link>
+                                                    {
+                                                        (historyComic.id) ? (
+                                                            <Link to={'/reader?titleNo=' + comic.titleNo + '&episodeNo=' + historyComic.episodeNo}
+                                                                className="btn__continue-reading"
+                                                            >
+                                                                {t('history.continueBtn')}
+                                                            </Link>
+                                                        ) : (<></>)
+                                                    }
+
+                                                </div>
                                             </div>
+                                        </div>
+                                        <div className="d-flex d-sm-none mt-3 justify-content-center">
+                                            <Link to={'/reader?titleNo=' + comic.titleNo + '&episodeNo=' + firstEpisode} className="btn-start-read">
+                                                {t('detail.startRead')}
+                                            </Link>
+                                            {
+                                                (historyComic.id) ? (
+                                                    <Link to={'/reader?titleNo=' + comic.titleNo + '&episodeNo=' + historyComic.episodeNo}
+                                                        className="btn__continue-reading"
+                                                    >
+                                                        {t('history.continueBtn')}
+                                                    </Link>
+                                                ) : (<></>)
+                                            }
                                         </div>
                                     </div>
                                     <div className="row">
@@ -295,6 +339,6 @@ function Detail() {
         </>
     );
 
-    }
+}
 
 export default Detail;

@@ -15,7 +15,7 @@
         "setting": {
             "languageLabel": "Language"
         },
-        "user":{
+        "user": {
             "logoutBtn": "Log out",
             "historyTitle": "History"
         }
@@ -43,7 +43,7 @@
     "detail": {
         "authorTitle": "Author",
         "genre": "Genre",
-        "startRead": "Read first episode",
+        "startRead": "Start reading",
         "summary": "Summary",
         "episodesTitle": "Episodes",
         "commentTitle": "Comment",
@@ -94,6 +94,7 @@
         "title": "Search results for "
     },
     "history": {
-        "deleteBtn": "Delete"
+        "deleteBtn": "Delete",
+        "continueBtn": "Resume reading"
     }
 }

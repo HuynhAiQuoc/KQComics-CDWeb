@@ -98,6 +98,7 @@
         "title": "Kết quả tìm kiếm cho "
     },
     "history": {
-        "deleteBtn": "Xóa"
+        "deleteBtn": "Xóa",
+        "continueBtn": "Đọc tiếp"
     }
 }

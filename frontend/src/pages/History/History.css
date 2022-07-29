@@ -10,3 +10,11 @@
 .delete-comic-btn:hover{
     color: var(--yellow-color);
 }
+
+.continue__reading-btn{
+    color: var(--white-color);
+}
+
+.continue__reading-btn:hover{
+    color: var(--yellow-color);
+}
