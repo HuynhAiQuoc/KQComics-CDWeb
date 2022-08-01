@@ -211,7 +211,7 @@ function Header() {
                                                         {user.username}
                                                     </div>
                                                     <div className="user__info-item-line"></div>
-                                                    <Link to={""} className="user__info-item user__info-item--hover">
+                                                    <Link  to="/history" className="user__info-item user__info-item--hover">
                                                         <div className="user__info-item-icon">
                                                             <FontAwesomeIcon icon={faClockRotateLeft} />
                                                         </div>
