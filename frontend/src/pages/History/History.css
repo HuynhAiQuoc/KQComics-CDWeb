@@ -1,20 +1,36 @@
-
-
-.delete-comic-btn{
+.delete-comic-btn {
     color: #fff;
     background: transparent;
     border: none;
     width: 70px;
 }
 
-.delete-comic-btn:hover{
+.delete-comic-btn:hover {
     color: var(--yellow-color);
 }
 
-.continue__reading-btn{
+.continue__reading-btn {
     color: var(--white-color);
 }
 
-.continue__reading-btn:hover{
+.continue__reading-btn:hover {
     color: var(--yellow-color);
+}
+
+.history__null {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.history__null-logo {}
+
+.history__null-logo-icon {
+    color: var(--yellow-color);
+    font-size: 50px;
+    margin-bottom: 25px;
+}
+
+.history__null-message {
+    color: var(--white-color);
+    font-size: 18px;
 }

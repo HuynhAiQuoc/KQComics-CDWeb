@@ -95,6 +95,9 @@
     },
     "history": {
         "deleteBtn": "Delete",
-        "continueBtn": "Resume reading"
+        "continueBtn": "Resume reading",
+        "loginMessage": "Please login to experience this feature.",
+        "nullComics": "No comic in History",
+        "nullDescriptions": "Recently read comics will be shown here automatically."
     }
 }

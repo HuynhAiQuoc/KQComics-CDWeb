@@ -2,7 +2,7 @@
 import './History.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faClockRotateLeft, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react'
@@ -55,13 +55,13 @@ function History() {
     return (
         <>
             <div className="col-12 spacing-header">
-                <div className="row">
+                {/* <div className="row">
                     <div className="border-bottom border-color-white p-0">
                         <div className="background-header search-title d-flex align-items-center ps-md-4 ps-2">
                             <h4 className="text-white m-0"></h4>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className="row">
                     <div className="ps-lg-5 pe-lg-5 ps-md-4 pe-md-4 mt-4">
                         <div className="row">
@@ -102,8 +102,27 @@ function History() {
                                         ))
                                     ) :
                                     (
-                                        <>
-                                        </>
+                                        <div className="history__null">
+                                            <div className="history__null-logo">
+                                                <FontAwesomeIcon className="history__null-logo-icon" icon={faClockRotateLeft} />
+                                            </div>
+                                            <span className="history__null-message">
+
+                                                <span>
+                                                    {
+                                                        (AuthService.getCurrentUser()) ?
+                                                            (<>{t('history.nullComics')}</>)
+                                                            :
+                                                            (<>{t('history.loginMessage')}</>)
+                                                    }
+                                                </span>
+                                                <br />
+
+                                                <span>
+                                                    {t('history.nullDescriptions')}
+                                                </span>
+                                            </span>
+                                        </div>
                                     )
                             }
 

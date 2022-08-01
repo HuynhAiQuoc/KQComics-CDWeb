@@ -99,6 +99,9 @@
     },
     "history": {
         "deleteBtn": "Xóa",
-        "continueBtn": "Đọc tiếp"
+        "continueBtn": "Đọc tiếp",
+        "loginMessage": "Vui lòng đăng nhập để trải nghiệm tính năng này.",
+        "nullComics": "Bạn chưa đọc truyện nào",
+        "nullDescriptions": "Các truyện đã đọc sẽ được hiển thị ở đây."
     }
 }

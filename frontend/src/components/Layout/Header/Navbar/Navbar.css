@@ -13,7 +13,7 @@
 }
 
  
-.active {
+.navbar-nav-custom .active {
     color: var(--yellow-color);
 }
 
