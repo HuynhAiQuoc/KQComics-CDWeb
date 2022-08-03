@@ -1,10 +1,9 @@
 
 
 
-// const RAPID_KEY = '626395e262msh02ba9742602b4e1p1d8a23jsnc6576cb24819';
+const RAPID_KEY = '626395e262msh02ba9742602b4e1p1d8a23jsnc6576cb24819';
 // const RAPID_KEY = 'a231414b5fmshe281d486bd98338p11077ejsn24b8965962c2';
 // const RAPID_KEY = 'cb89962aa5mshb30a65017c9f699p1cbcd4jsn07353ee11054';
-const RAPID_KEY = '';
 const RAPID_HOST = 'webtoon.p.rapidapi.com';
 
 const options = {

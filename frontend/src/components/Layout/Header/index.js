@@ -8,7 +8,7 @@ import Navbar from './Navbar/index.js';
 import SearchField from './SearchField/index.js';
 import Account from '~/pages/Account/index.js'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import Switch from "react-switch";
 
@@ -49,6 +49,7 @@ function Header() {
     const [showSetting, setShowSetting] = useState(false);
     const [showAccount, setShowAccount] = useState(false);
     const [user, setUser] = useState([]);
+    const navigate = useNavigate();
     const [isLogin, setIsLogin] = useState(() => {
         const items = AuthService.getCurrentUser();
         if (items) {
@@ -131,11 +132,11 @@ function Header() {
         }
     }, [showAccount]);
 
-
     const handleLogout = () => {
         AuthService.logout();
         setShowAccount(false);
         setIsLogin(false);
+        navigate("/")
     }
 
     return (
