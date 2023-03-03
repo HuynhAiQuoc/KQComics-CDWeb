@@ -1,11 +1,13 @@
 package com.mightyjava.service;
 
 import com.mightyjava.domain.Comment;
+import com.mightyjava.dto.CommentDTO;
+import com.mightyjava.dto.CreateCommentDTO;
 
 import java.util.List;
 
 public interface ICommentService {
 
-    Comment addComment(Comment comment);
-    List<Comment> getCommentsByTitleNo(long titleNo);
+    CommentDTO addComment(CreateCommentDTO comment);
+    List<CommentDTO> getCommentsByTitleNo(long titleNo);
 }

@@ -1,12 +1,20 @@
 package com.mightyjava.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 @Entity
-@Table(name = "history")
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class History {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -15,42 +23,8 @@ public class History {
     @Column(nullable = false)
     private Long episodeNo;
 
-    @Column(nullable = false)
-    private Long userId;
+   @ManyToOne
+   @JoinColumn(name="userId")
+    private User user;
 
-    public History() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getTitleNo() {
-        return titleNo;
-    }
-
-    public void setTitleNo(Long titleNo) {
-        this.titleNo = titleNo;
-    }
-
-    public Long getEpisodeNo() {
-        return episodeNo;
-    }
-
-    public void setEpisodeNo(Long episodeNo) {
-        this.episodeNo = episodeNo;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 }

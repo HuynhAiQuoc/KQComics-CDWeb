@@ -1,16 +1,17 @@
 package com.mightyjava.service;
 
 import com.mightyjava.domain.History;
+import com.mightyjava.dto.HistoryDTO;
 
 import java.util.List;
 
 public interface IHistoryService {
 
-    void addHistory(History history);
+    HistoryDTO addHistory(HistoryDTO history);
 
-    List<History> getHistoryList(long userId);
+    List<HistoryDTO> getHistoryList(long userId);
 
-    History getComic(long userId, long titleNo);
+    HistoryDTO getComic(long userId, long titleNo);
 
     void delete(long id);
 }

@@ -1,40 +1,60 @@
 package com.mightyjava.service.impl;
 
 import com.mightyjava.domain.History;
+import com.mightyjava.domain.User;
+import com.mightyjava.dto.HistoryDTO;
 import com.mightyjava.repository.HistoryRepository;
 import com.mightyjava.service.IHistoryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mightyjava.service.IUserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class HistoryServiceImpl implements IHistoryService {
+    private final HistoryRepository historyRepository;
 
-    @Autowired
-    private HistoryRepository historyRepository;
+    private final IUserService userService;
+
+    private final ModelMapper modelMapper;
+
+    public HistoryServiceImpl(HistoryRepository historyRepository, IUserService userService, ModelMapper modelMapper) {
+        this.historyRepository = historyRepository;
+        this.userService = userService;
+        this.modelMapper = modelMapper;
+    }
 
     @Override
-    public void addHistory(History history) {
+    public HistoryDTO addHistory(HistoryDTO history) {
+        User user = this.userService.findById(history.getUserId()).orElse(null);
         History oldHistory = historyRepository.checkExistHistory(history.getUserId(), history.getTitleNo());
         if (oldHistory != null) {
             //update history
             oldHistory.setEpisodeNo(history.getEpisodeNo());
-            historyRepository.save(oldHistory);
+            oldHistory=  historyRepository.save(oldHistory);
         } else {
             // add history
-            historyRepository.save(history);
+            History h = new History();
+            h.setTitleNo(history.getTitleNo());
+            h.setEpisodeNo(history.getEpisodeNo());
+            h.setUser(user);
+            oldHistory=  historyRepository.save(h);
         }
+        return this.modelMapper.map(oldHistory, HistoryDTO.class);
     }
 
     @Override
-    public List<History> getHistoryList(long userId) {
-        return historyRepository.getHistoryByUserId(userId);
+    public List<HistoryDTO> getHistoryList(long userId) {
+        List<History> lists =  historyRepository.getHistoryByUserId(userId);
+        return lists.stream().map(h -> this.modelMapper.map(h, HistoryDTO.class)).collect(Collectors.toList());
     }
 
     @Override
-    public History getComic(long userId, long titleNo) {
-        return historyRepository.checkExistHistory(userId, titleNo);
+    public HistoryDTO getComic(long userId, long titleNo) {
+        History history =  historyRepository.checkExistHistory(userId, titleNo);
+        return this.modelMapper.map(history, HistoryDTO.class);
     }
 
     @Override

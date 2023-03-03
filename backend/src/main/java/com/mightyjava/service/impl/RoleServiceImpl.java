@@ -1,25 +1,22 @@
 package com.mightyjava.service.impl;
 
-import java.util.Collection;
-import java.util.Optional;
-
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.mightyjava.domain.Role;
 import com.mightyjava.repository.RoleRepository;
 import com.mightyjava.service.IRoleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
-public class RoleServiceImpl implements IRoleService<Role> {
+public class RoleServiceImpl implements IRoleService {
 
 	@Autowired
 	private RoleRepository roleRepository;
 
 	@Override
-	public Collection<Role> findAll() {
+	public List<Role> findAll() {
 		return roleRepository.findAll();
 	}
 
@@ -29,8 +26,8 @@ public class RoleServiceImpl implements IRoleService<Role> {
 	}
 	
 	@Override
-	public Role findByName(String name) {
-		return roleRepository.findByName(name);
+	public  Role findByName(String name) {
+		return roleRepository.findByName(name).orElse(null);
 	}
 
 	@Override
@@ -38,16 +35,6 @@ public class RoleServiceImpl implements IRoleService<Role> {
 		return roleRepository.saveAndFlush(role);
 	}
 
-	@Override
-	public String deleteById(Long id) {
-		JSONObject jsonObject = new JSONObject();
-		try {
-			roleRepository.deleteById(id);
-			jsonObject.put("message", "Role deleted successfully");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return jsonObject.toString();
-	}
+
 
 }

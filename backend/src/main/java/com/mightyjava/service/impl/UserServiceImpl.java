@@ -1,27 +1,35 @@
 package com.mightyjava.service.impl;
 
-import java.util.Collection;
-import java.util.Optional;
-
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mightyjava.domain.Role;
+import com.mightyjava.domain.User;
+import com.mightyjava.dto.CheckUserResponse;
+import com.mightyjava.dto.CreateUserDTO;
+import com.mightyjava.dto.UserDTO;
+import com.mightyjava.repository.UserRepository;
+import com.mightyjava.service.IRoleService;
+import com.mightyjava.service.IUserService;
+import com.mightyjava.utils.ConstantUtils;
+import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.mightyjava.domain.User;
-import com.mightyjava.repository.UserRepository;
-import com.mightyjava.service.IService;
+import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements IService<User> {
+public class UserServiceImpl implements IUserService{
+	private final UserRepository userRepository;
+	private final PasswordEncoder encoder;
+	private final ModelMapper modelMapper;
+	private final IRoleService roleService;
 
-	@Autowired
-	private UserRepository userRepository;
-
-	@Override
-	public Collection<User> findAll() {
-		return userRepository.findAll();
+	public UserServiceImpl(UserRepository userRepository, PasswordEncoder encoder, ModelMapper modelMapper, IRoleService roleService) {
+		this.userRepository = userRepository;
+		this.encoder = encoder;
+		this.modelMapper = modelMapper;
+		this.roleService = roleService;
 	}
+
 
 	@Override
 	public Optional<User> findById(Long id) {
@@ -29,20 +37,34 @@ public class UserServiceImpl implements IService<User> {
 	}
 
 	@Override
-	public User saveOrUpdate(User user) {
+	public  User saveOrUpdate(User user) {
 		return userRepository.saveAndFlush(user);
 	}
 
 	@Override
-	public String deleteById(Long id) {
-		JSONObject jsonObject = new JSONObject();
-		try {
-			userRepository.deleteById(id);
-			jsonObject.put("message", "User deleted successfully");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return jsonObject.toString();
+	public UserDTO createUser(CreateUserDTO newUser) {
+		Role role = this.roleService.findByName(ConstantUtils.USER.toString());
+		User user = new User();
+		user.setUsername(newUser.getUsername());
+		user.setEmail(newUser.getEmail());
+		user.setPassword(this.encoder.encode(newUser.getPassword()));
+		user.setRole(role);
+		User result = this.saveOrUpdate(user);
+		return this.modelMapper.map(result, UserDTO.class);
 	}
+
+	@Override
+	public CheckUserResponse checkExistUser(String email) {
+		CheckUserResponse result = new CheckUserResponse();
+		Optional<User> user = this.userRepository.findByEmail(email);
+		 if(user.isPresent()){
+			 result.setMessage("exist");
+			 result.setUsername(user.get().getUsername());
+		 }else{
+			 result.setMessage("empty");
+		 }
+		return result;
+	}
+
 
 }
