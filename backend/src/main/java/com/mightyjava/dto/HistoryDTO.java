@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HistoryDTO {
+    private Long id;
     private Long titleNo;
     private Long episodeNo;
     private Long userId;

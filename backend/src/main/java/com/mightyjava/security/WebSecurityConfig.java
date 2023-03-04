@@ -2,6 +2,8 @@ package com.mightyjava.security;
 
 import com.mightyjava.security.jwt.AuthTokenFilter;
 import com.mightyjava.security.jwt.JwtUtils;
+import com.mightyjava.security.services.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,15 +18,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 public class WebSecurityConfig {
-
-    private final UserDetailsService userDetailsService;
-
-    private final JwtUtils jwtUtils;
-
-    public WebSecurityConfig(UserDetailsService userDetailsService, JwtUtils jwtUtils) {
-        this.userDetailsService = userDetailsService;
-        this.jwtUtils = jwtUtils;
-    }
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
+    @Autowired
+    JwtUtils jwtUtils;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

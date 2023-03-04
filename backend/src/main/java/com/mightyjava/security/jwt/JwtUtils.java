@@ -14,21 +14,22 @@ public class JwtUtils {
     @Value("${jwt.expiration}")
     private int jwtExpirationMs;
 
-    public String generateJwtToke(String username, List<String> authorities) {
+
+    public String generateJwtToken(String username,  List<String> authorities) {
         String jwtToken = Jwts.builder()
                 .setSubject(username)
                 .claim("authorities", authorities)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(SignatureAlgorithm.ES512, jwtSecret)
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
-
         return "Bearer " + jwtToken;
     }
 
-    public boolean validateJwtToken(String jwtToken){
+
+    public boolean validateJwtToken(String jwt) {
         try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(jwtToken);
+            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(jwt);
             return true;
         } catch (SignatureException | MalformedJwtException | UnsupportedJwtException | IllegalArgumentException |
                  ExpiredJwtException e) {
@@ -36,7 +37,8 @@ public class JwtUtils {
         }
     }
 
-    public Claims getClaimsJwt(String jwt){
+
+    public Claims getClaimsJwt(String jwt) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(jwt).getBody();
     }
 }

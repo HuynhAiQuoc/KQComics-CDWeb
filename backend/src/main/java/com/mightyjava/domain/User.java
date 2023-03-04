@@ -7,13 +7,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tbl_user")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +26,10 @@ public class User {
 	private String email;
 	@Column(nullable = false)
 	private String password;
-	@ManyToOne
-	@JoinColumn(name = "roleId")
-	private Role role;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_roles",
+			joinColumns = @JoinColumn(name="user_id"),
+			inverseJoinColumns = @JoinColumn(name="role_id")
+	)
+	private Set<Role> roles;
 }

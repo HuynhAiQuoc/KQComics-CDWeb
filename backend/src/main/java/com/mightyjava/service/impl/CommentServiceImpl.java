@@ -39,7 +39,7 @@ public class CommentServiceImpl implements ICommentService {
 
     @Override
     public List<CommentDTO> getCommentsByTitleNo(long titleNo) {
-        List<Comment> comments = commentRepository.getCommentsByTitleNo(titleNo);
+        List<Comment> comments = commentRepository.getAllByTitleNo(titleNo);
         return comments.stream().map(comment -> this.modelMapper.map(comment, CommentDTO.class)).collect(Collectors.toList());
     }
 

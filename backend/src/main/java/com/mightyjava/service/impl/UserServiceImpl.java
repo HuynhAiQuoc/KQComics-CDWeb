@@ -13,8 +13,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements IUserService{
@@ -44,11 +45,13 @@ public class UserServiceImpl implements IUserService{
 	@Override
 	public UserDTO createUser(CreateUserDTO newUser) {
 		Role role = this.roleService.findByName(ConstantUtils.USER.toString());
+		Set<Role> roles = new HashSet<>();
+		roles.add(role);
 		User user = new User();
 		user.setUsername(newUser.getUsername());
 		user.setEmail(newUser.getEmail());
-		user.setPassword(this.encoder.encode(newUser.getPassword()));
-		user.setRole(role);
+		user.setPassword(encoder.encode(newUser.getPassword()));
+		user.setRoles(roles);
 		User result = this.saveOrUpdate(user);
 		return this.modelMapper.map(result, UserDTO.class);
 	}
